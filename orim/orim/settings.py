@@ -24,9 +24,7 @@ SECRETS_PATH = os.path.join(ROOT_DIR, 'orim/secrets.json')
 
 secrets = json.loads(open(SECRETS_PATH).read()) # dict 형식
 
-# secrets.json 내용을 settings.py에 동적으로 정의
-for key, value in secrets.items():
-    setattr(sys.modules[__name__], key, value)
+SECRET_KEY = secrets['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'orimapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
