@@ -7,6 +7,8 @@ class Video(models.Model):
     channelTitle = models.CharField(max_length=100, blank=True, null=False)
     categoryId = models.IntegerField()
     thumbnail_url = models.CharField(max_length=100)
+    like = models.IntegerField(default=0)
+    view = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.title
