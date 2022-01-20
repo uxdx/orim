@@ -1,2 +1,4 @@
 flask
+flask_assets
 pyrebase
+firebase_admin
