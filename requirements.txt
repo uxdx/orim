@@ -1,4 +1,4 @@
 flask
 flask_assets
-pyrebase
+pyrebase4
 firebase_admin
