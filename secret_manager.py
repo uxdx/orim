@@ -17,3 +17,4 @@ def access_secret(project_id = "jinho-337705" , secret_id = "Firebase" , version
 
 if __name__ == '__main__':
     print(access_secret())
+    pass
