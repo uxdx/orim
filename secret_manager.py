@@ -1,3 +1,6 @@
+import json
+
+
 def access_secret(project_id = "jinho-337705" , secret_id = "Firebase" , version_id = 1) -> str:
     from google.cloud import secretmanager
     # 아래 부분에서 에러가 안나려면 GCP에서 '서비스계정' 에서 계정을 만들고,
@@ -9,7 +12,8 @@ def access_secret(project_id = "jinho-337705" , secret_id = "Firebase" , version
     response = client.access_secret_version(request={"name": name})
 
     payload = response.payload.data.decode("UTF-8")
-    return "{}".format(payload)
+    return json.loads(payload)
+
 
 if __name__ == '__main__':
     print(access_secret())
