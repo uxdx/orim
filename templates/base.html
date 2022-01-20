@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
     <head>
-    {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% assets "scss_all" %}
+    <link rel="stylesheet" type=text/css href="{{ ASSET_URL }}">
+    {% endassets %}
     <title>{% block title %}{% endblock %} - My Webpage</title>
-    {% endblock %}
         </head>
     <body>
         <div id="content">{% block content %}{% endblock %}</div>
