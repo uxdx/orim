@@ -25,7 +25,20 @@ def main():
     #     todo_list = todo.val() # 그 값의 dict형태
     #     print(todo_list.values())
     #     return render_template('index.html', todo=todo_list.values())
-    return render_template('index.html')
+
+
+    video_list= dict()
+    video = {
+        "url" : "https://asd",
+        "thumbnail" : "https:/asdfasdf",
+    }
+    for i in range(2):
+        key = str(i)
+        video_list[key] = video
+
+    print(video_list)
+
+    return render_template('index.html', video_list=video_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

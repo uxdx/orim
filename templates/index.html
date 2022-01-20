@@ -1,36 +1,22 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <form action="/" method="post">
-            <input type="text" name="name">
-            <button type="submit">Submit</button>
-        </form>
-        {% for task in todo %}
-            {{ task }}
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Index</h1>
+  <p class="important">
+    Welcome on my awesome homepage.
+    <ol class = "main_video_line" >
+      {% for key, value in video_list.items()%}
+        {% for key1, value1 in value.items()%}
+          <div> {{key1}}  </div>
+          <div> {{value1}} </div>
         {% endfor %}
-        {{ todo }}
-        <script type="module">
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-          
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-              apiKey: "AIzaSyDNmF86WwH3phNfERP7RF_jLXq9wcAeJwg",
-              authDomain: "jinho-337705.firebaseapp.com",
-              databaseURL: "https://jinho-337705-default-rtdb.asia-southeast1.firebasedatabase.app",
-              projectId: "jinho-337705",
-              storageBucket: "jinho-337705.appspot.com",
-              messagingSenderId: "670894580412",
-              appId: "1:670894580412:web:653be01d6cfd4600cde6b9"
-            };
-          
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-          </script>
-    </body>
-</html>
+      {% endfor%}
+  
+  </ol> 
+{% endblock %}
