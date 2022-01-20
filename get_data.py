@@ -12,13 +12,11 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 def get_index_data() -> dict:
-    video_list= dict()
-    video = {
-        "url" : "https://asd",
-        "thumbnail" : "https:/asdfasdf",
-    }
-    for i in range(2):
-        key = str(i)
-        video_list[key] = video
+    videos = db.child('videos').get()
+    videos_list = videos.val()
 
-    return video_list
+    return videos_list
+
+if __name__ == '__main__':
+    videos = db.child('videos').get()
+    videos_list = videos.val()

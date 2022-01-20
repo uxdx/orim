@@ -7,8 +7,7 @@
     <ol class = "main_video_line" >
       {% for key, value in video_list.items()%}
         {% for key1, value1 in value.items()%}
-          <div> {{key1}}  </div>
-          <div> {{value1}} </div>
+          <div> {{key1}} :: {{value1}}  </div>
         {% endfor %}
       {% endfor%}
   
