@@ -9,3 +9,5 @@ RUN pip install -r requirements.txt
 
 ENTRYPOINT ["python"]
 CMD ["main.py"]
+
+EXPOSE 8080
