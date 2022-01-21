@@ -3,6 +3,7 @@ from flask_assets import Environment, Bundle
 
 from get_data import get_index_data
 
+import os
 
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
@@ -19,4 +20,5 @@ def index():
     return render_template('index.html', video_list=get_index_data())
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8080, debug=False)
+    server_port = os.environ.get('PORT', '8080')
+    app.run(debug=False, port=server_port, host='0.0.0.0')
