@@ -1,2 +1,63 @@
 body {
-  background-color: blue; }
+  margin: 0px; }
+
+  .top {
+    display: grid;
+    grid-template-columns: 70px 1fr 100px;
+    margin: 0px;
+    height: 100px;
+    border-bottom: 1px solid gray; }
+    .top .material-icons {
+      font-size: 30px;
+      text-align: center;
+      margin: 15px;
+      padding-top: 5px; }
+      .top h1 {
+        margin: 25px;
+        text-align: center; }
+        .top .sign {
+          font-size: 18px;
+          text-align: center;
+          height: 30px;
+          padding-top: 35px;
+          text-decoration: none;
+          color: inherit; }
+          .top button {
+            border: none;
+            background-color: white; }
+            .top .drawer .drawer_top {
+              display: grid;
+              grid-template-columns: 2fr 1fr; }
+              .top .drawer .drawer_top h2 {
+                margin: 25; }
+
+.main_video_line {
+  margin: 50px;
+  padding: 0px; }
+
+  .yt_video {
+    display: inline-grid;
+    grid-template-rows: 1fr 50px;
+    height: 250px;
+    border: solid gray 1px;
+    margin-bottom: 10px; }
+    .yt_video .video_thumbnail {
+      display: inline;
+      list-style: none; }
+      .yt_video .video_thumbnail img {
+        border: 3px solid none; }
+        .yt_video .video_thumbnail .video_information {
+          font-size: 15px;
+          display: inline-grid;
+          grid-template-rows: 1fr 1fr; }
+          .yt_video .video_thumbnail .video_information .material-icons {
+            font-size: 17px; }
+            .yt_video .video_thumbnail .video_information .video_information_sub {
+              display: inline-grid;
+              grid-template-columns: 3.5fr 1fr 1fr;
+              font-size: 15px; }
+              .yt_video .video_thumbnail .video_information .video_information_title {
+                height: 30px;
+                font-size: 15px; }
+                .yt_video .video_thumbnail .video_information .video_information_title p {
+                  margin: 0px; }
