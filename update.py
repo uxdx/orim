@@ -2,6 +2,8 @@ from datetime import datetime
 import datetime
 import pyrebase
 import json
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 from secret_manager import access_secret
 
@@ -12,12 +14,18 @@ firebase = pyrebase.initialize_app(config)
 # 데이터베이스 인스턴스 생성
 db = firebase.database()
 
+DEVELOPER_KEY = ""
+YOUTUBE_API_SERVICE_NAME="youtube"
+YOUTUBE_API_VERSION="v3"
+youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
+
 def get_index_data() -> dict:
     videos = db.child('video').get()
     videos_list = videos.val()
     return videos_list
 
 def update_data():
+    #업데이트 리스트
     key_list=['like','view']
     category=['Gaming','Music','Sports']
     data=get_index_data()
