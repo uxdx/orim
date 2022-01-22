@@ -11,9 +11,8 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 def get_index_data() -> dict:
-    videos = db.child('videos').get()
+    videos = db.child('mostPopular').get()
     videos_list = videos.val()
-
     return videos_list
 
 if __name__ == '__main__':
