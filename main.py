@@ -1,8 +1,9 @@
-from flask import *
+from flask import Flask, render_template
 from flask_assets import Environment, Bundle
 
 from get_data import get_index_data
 
+import os
 
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
@@ -15,7 +16,17 @@ assets.register('scss_all', scss)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html', video_list=get_index_data())
+    service = os.environ.get('K_SERVICE', 'Unknown service')
+    revision = os.environ.get('K_REVISION', 'Unknown revision')
+    firebase_config = os.environ.get('FIREBASE_CONFIG')
+    print(firebase_config)
+    
+    return render_template('index.html',
+        video_list=get_index_data(),
+        config=firebase_config,
+        Service=service,
+        Revision=revision)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    server_port = os.environ.get('PORT', '8080')
+    app.run(debug=False, port=server_port, host='0.0.0.0')
