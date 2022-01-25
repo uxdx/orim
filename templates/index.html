@@ -34,7 +34,7 @@
         <a class = "sign in" href = "http://www.naver.com">sign in</a> 
     </div>
 
-    ol class = "main_video_line" >
+    <ol class = "main_video_line" >
     {% for key, value in video_list.items()%}
         
             <list class = "yt_video" id="main_no_1">
@@ -46,12 +46,12 @@
 
                 <div class = "video_information">
                     <div class = "video_information_title">
-                        <a href = "http://www.naver.com" >영상제목</a>
+                        <a href = "http://www.naver.com" >{{value['title']}}</a>
                     </div>
 
                     <div class = "video_information_sub">
                         <div class = "video_information_sub_channel">
-                            <a href = "http://www.naver.com" >채널이름</a>
+                            <a href = "http://www.naver.com" >{{value['channel_name']}}</a>
                         </div>
                         <div class = "video_information_sub1">
                             <div class ="video_information_sub2_1">
@@ -59,19 +59,19 @@
                                 <span class="material-icons">
                                     thumb_up_alt
                                 </span>
-                                50
+                                {{value['like']}}
                             </div>
 
                             <div class = "video_information_sub_view">
                                 <span class="material-icons">
                                     visibility
                                 </span>
-                                70
+                                {{value['view']}}
                             </div>
                             </div>
 
                             <div class = "video_information_sub2_2">
-                            2022.01.01
+                                {{value['uploadDate']}}
                             </div>
                         </div>
                     </div>
