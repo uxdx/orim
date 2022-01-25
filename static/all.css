@@ -33,31 +33,48 @@ body {
 
 .main_video_line {
   margin: 50px;
-  padding: 0px; }
+  padding: 0px;
+  align-content: center; }
 
   .yt_video {
     display: inline-grid;
-    grid-template-rows: 1fr 50px;
-    height: 250px;
+    grid-template-rows: 260px 1fr;
     border: solid gray 1px;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    height: 330px; }
     .yt_video .video_thumbnail {
       display: inline;
-      list-style: none; }
+      list-style: none;
+      width: 380px;
+      height: 260px;
+      border-bottom: solid gray 1px; }
       .yt_video .video_thumbnail img {
-        border: 3px solid none; }
-        .yt_video .video_thumbnail .video_information {
-          font-size: 15px;
+        border: 3px solid none;
+        width: 380px;
+        height: 260px; }
+    .yt_video .video_information_title {
+      font-size: 17px; }
+      .yt_video .video_information_title p {
+        margin: 0px; }
+    .yt_video .video_information {
+      font-size: 10px;
+      height: 70px;
+      display: inline-grid;
+      grid-template-rows: 25px 1fr; }
+      .yt_video .video_information .material-icons {
+        font-size: 15px; }
+        .yt_video .video_information .video_information_sub {
           display: inline-grid;
-          grid-template-rows: 1fr 1fr; }
-          .yt_video .video_thumbnail .video_information .material-icons {
-            font-size: 17px; }
-            .yt_video .video_thumbnail .video_information .video_information_sub {
+          grid-template-columns: 2fr 1fr;
+          font-size: 15px; }
+          .yt_video .video_information .video_information_sub .video_information_sub_channel {
+            margin-top: 10px; }
+            .yt_video .video_information .video_information_sub .video_information_sub1 {
+              font-size: 14px;
               display: inline-grid;
-              grid-template-columns: 3.5fr 1fr 1fr;
-              font-size: 15px; }
-              .yt_video .video_thumbnail .video_information .video_information_title {
-                height: 30px;
-                font-size: 15px; }
-                .yt_video .video_thumbnail .video_information .video_information_title p {
-                  margin: 0px; }
+              grid-template-rows: 1fr 1fr; }
+              .yt_video .video_information .video_information_sub .video_information_sub1 .video_information_sub2_1 {
+                display: inline-grid;
+                grid-template-columns: 1fr 1fr; }
+                .yt_video .video_information .video_information_sub .video_information_sub1 .video_information_sub2_2 {
+                  font-size: 15px; }

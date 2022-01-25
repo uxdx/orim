@@ -53,49 +53,74 @@ body{
 .main_video_line{
     margin : 50px;
     padding: 0px;
+    align-content : center;
 }
 
 .yt_video{
     display : inline-grid;
-    grid-template-rows: 1fr 50px;
-    height: 250px;
+    grid-template-rows: 260px 1fr;
     border : solid gray 1px;
     margin-bottom: 10px;
+    height : 330px;
     
     .video_thumbnail{
         display : inline;
         list-style: none;
+        width : 380px;
+        height : 260px;
+        border-bottom: solid gray 1px;
+
 
         img{
             border: 3px solid none ;
-            
+            width : 380px;
+            height : 260px;
         }
+    }
+    .video_information_title{
+        font-size: 17px;
+
+        p{
+            margin : 0px;
+        }
+    }
 
         
     .video_information{
-        font-size: 15px;
+        font-size: 10px;
+        height : 70px;
+        
         display : inline-grid;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 25px 1fr;
 
+        
         .material-icons{
-            font-size: 17px;
+            font-size: 15px;
         }
+
 
         .video_information_sub{
             display: inline-grid;
-            grid-template-columns: 3.5fr 1fr 1fr;
+            grid-template-columns:2fr 1fr;
             font-size: 15px;
-        }
-
-        .video_information_title{
-            height: 30px;
-            font-size: 15px;
-
-            p{
-                margin : 0px;
+            .video_information_sub_channel{
+            margin-top : 10px;
             }
+            .video_information_sub1{
+                font-size: 14px;
+                display: inline-grid;
+                grid-template-rows:1fr 1fr;  
+                .video_information_sub2_1{
+                    display: inline-grid;
+                    grid-template-columns:1fr 1fr;  
+                }
+                .video_information_sub2_2{
+                    font-size : 15px;
+                }
+            }                  
         }
 
+        
     }
-    }
+    
 }
