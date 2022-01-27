@@ -1,10 +1,15 @@
+# ! 이 파일은 Cloud run 환경에서는 사용하지 않음
+# 로컬에서 테스트할 때만 사용함.
+# 따라서 GOOGLE_APPLICATION_CREDENTIALS를 Cloud run 에서 정의할 필요가 없음
+# 모든 secret은 환경변수로 접근함.
+
 import json
 import os
 
 from google.cloud import secretmanager
 
-client = secretmanager.SecretManagerServiceClient()
 def access_secret_json(secret_id:str, project_id = "jinho-337705" , version_id = 1) -> str:
+    client = secretmanager.SecretManagerServiceClient()
     # 아래 부분에서 에러가 안나려면 GCP에서 '서비스계정' 에서 계정을 만들고,
     # '키' 부분에서 키를 하나 만든다음 그 키(json파일)를 다운로드해서
     # 환경변수 $env:GOOGLE_APPLICATION_CREDENTIALS="C:주소.json"
@@ -16,6 +21,7 @@ def access_secret_json(secret_id:str, project_id = "jinho-337705" , version_id =
     return json.loads(payload)
 
 def access_secret(secret_id:str, project_id = "jinho-337705"  , version_id = 1):
+    client = secretmanager.SecretManagerServiceClient()
     name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
     response = client.access_secret_version(request={"name": name})
 

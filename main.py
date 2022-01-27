@@ -12,10 +12,10 @@ from secret_manager import access_secret
 
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
-app.secret_key = access_secret(secret_id='FlaskKey')
+app.secret_key = os.environ.get('FLASK_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['GOOGLE_OAUTH2_CLIENT_ID'] = access_secret(secret_id='GOOGLE_OAUTH2_CLIENT_ID')
-app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = access_secret(secret_id='GOOGLE_OAUTH2_CLIENT_SECRET')
+app.config['GOOGLE_OAUTH2_CLIENT_ID'] = os.environ.get('GOOGLE_OAUTH2_CLIENT_ID')
+app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET')
 oauth2 = UserOAuth2(app)
 
 # SCSS 세팅
