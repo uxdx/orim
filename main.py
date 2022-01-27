@@ -1,4 +1,4 @@
-from flask import *
+from flask import Flask, render_template
 from flask_assets import Environment, Bundle
 from oauth2client.contrib.flask_util import UserOAuth2
 
@@ -22,10 +22,18 @@ assets.url = app.static_url_path # =static/
 scss = Bundle('scss/index.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
 assets.register('scss_all', scss)
 
-## routes
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html', video_list=get_index_data())
+    service = os.environ.get('K_SERVICE', 'Unknown service')
+    revision = os.environ.get('K_REVISION', 'Unknown revision')
+    firebase_config = os.environ.get('FIREBASE_CONFIG')
+    print(firebase_config)
+    
+    return render_template('index.html',
+        video_list=get_index_data(),
+        config=firebase_config,
+        Service=service,
+        Revision=revision)
 
 @app.route('/test')
 @oauth2.required
