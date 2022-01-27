@@ -1,4 +1,5 @@
 flask
-flask_assets
+flask-assets
 pyrebase4
-firebase_admin
+firebase-admin
+google-cloud-secret-manager

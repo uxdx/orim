@@ -1,20 +1,22 @@
 <!doctype html>
 <html>
     <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <meta name="google-signin-client_id" content="670894580412-cl3vjkghu68hb2e79fq7tg9tptjqb84t.apps.googleusercontent.com">
+    {% block auth %}{% endblock %}
     {% assets "scss_all" %}
     <link rel="stylesheet" type=text/css href="{{ ASSET_URL }}">
     {% endassets %}
     <title>{% block title %}{% endblock %} - My Webpage</title>
         </head>
     <body>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <div id="content">{% block content %}{% endblock %}</div>
         <div id="footer">
         {% block footer %}
         &copy; Copyright 2010 by <a href="http://domain.invalid/">you</a>.
         {% endblock %}
         </div>
-        <script type="module">
+      <script type="module">
           // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
           // TODO: Add SDKs for Firebase products that you want to use
@@ -32,6 +34,7 @@
 
           // Initialize Firebase
             const app = initializeApp(firebaseConfig);
-        </script>
+      </script>
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
 </html>
