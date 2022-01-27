@@ -7,13 +7,15 @@ from get_data import get_index_data
 
 import os
 
+from secret_manager import access_secret
+
 
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
-app.secret_key = '12343'
+app.secret_key = access_secret(secret_id='FlaskKey')
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['GOOGLE_OAUTH2_CLIENT_ID'] = '670894580412-cl3vjkghu68hb2e79fq7tg9tptjqb84t.apps.googleusercontent.com'
-app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = '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'
+app.config['GOOGLE_OAUTH2_CLIENT_ID'] = access_secret(secret_id='GOOGLE_OAUTH2_CLIENT_ID')
+app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = access_secret(secret_id='GOOGLE_OAUTH2_CLIENT_SECRET')
 oauth2 = UserOAuth2(app)
 
 # SCSS 세팅
