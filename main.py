@@ -1,12 +1,22 @@
 from flask import Flask, render_template
 from flask_assets import Environment, Bundle
+from oauth2client.contrib.flask_util import UserOAuth2
+
 
 from get_data import get_index_data
 
 import os
 
+from secret_manager import access_secret
+
+
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
+app.secret_key = access_secret(secret_id='FlaskKey')
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['GOOGLE_OAUTH2_CLIENT_ID'] = access_secret(secret_id='GOOGLE_OAUTH2_CLIENT_ID')
+app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = access_secret(secret_id='GOOGLE_OAUTH2_CLIENT_SECRET')
+oauth2 = UserOAuth2(app)
 
 # SCSS 세팅
 assets = Environment(app)
@@ -26,6 +36,15 @@ def index():
         config=firebase_config,
         Service=service,
         Revision=revision)
+
+@app.route('/test')
+@oauth2.required
+def test():
+    if oauth2.has_credentials():
+        print('login OK')
+    else:
+        print('login NO')
+    return render_template('test.html')
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')

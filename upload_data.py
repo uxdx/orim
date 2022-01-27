@@ -5,11 +5,11 @@ import json
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+from secret_manager import access_secret_json
+
+
 # secrets.json 로딩
-with open("secrets.json") as jsonFile:
-    secrets = json.load(jsonFile)
-    jsonFile.close()
-config = secrets['config']
+config = access_secret_json('Firebase')
 # 파이어베이스 인스턴스 생성
 firebase = pyrebase.initialize_app(config)
 # 데이터베이스 인스턴스 생성
