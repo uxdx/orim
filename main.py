@@ -26,10 +26,9 @@ def index():
     service = os.environ.get('K_SERVICE', 'Unknown service')
     revision = os.environ.get('K_REVISION', 'Unknown revision')
     firebase_config = os.environ.get('FIREBASE_CONFIG')
-    print(firebase_config)
+    video_list=get_index_data()
     
-    return render_template('index.html',
-        video_list=get_index_data(),
+    return render_template('test.html',
         config=firebase_config,
         Service=service,
         Revision=revision)
