@@ -13,7 +13,8 @@ app.config['SESSION_TYPE'] = 'filesystem'
 # SCSS 세팅
 assets = Environment(app)
 assets.url = app.static_url_path # =static/
-scss = Bundle('scss/index.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
+print(app.static_url_path)
+scss = Bundle('scss/index.scss','scss/contents.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
 assets.register('scss_all', scss)
 
 @app.route('/', methods=['POST', 'GET'])
@@ -31,4 +32,4 @@ def index():
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=False, port=server_port, host='0.0.0.0')
+    app.run(debug=False, port=server_port)

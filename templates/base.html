@@ -1,15 +1,19 @@
 <!doctype html>
-<html>
+<html lang="ko">
     <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% assets "scss_all" %}
-    <link rel="stylesheet" type=text/css href="{{ ASSET_URL }}">
-    {% endassets %}
-    <title>{% block title %}{% endblock %} - My Webpage</title>
-        </head>
+      <meta chareset = "utf-8">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      {% assets "scss_all" %}
+      <link rel="stylesheet" type=text/css href="{{ ASSET_URL }}">
+      {% endassets %}
+      <title>{% block title %}{% endblock %} - My Webpage</title>
+    </head>
+
     <body>
         <div id="content">{% block content %}{% endblock %}</div>
         <div id="footer">
+        <br><br>
         {% block footer %}
         &copy; Copyright 2010 by <a href="http://domain.invalid/">you</a>.
         {% endblock %}
@@ -33,5 +37,11 @@
           // Initialize Firebase
             const app = initializeApp(firebaseConfig);
         </script>
+        {% block scripts %}
+        <script src = "static\js\night_day.js"></script>
+        <script src = "static\js\sidemenu.js"></script>   
+      
+        {% endblock scripts %}
+        
     </body>
 </html>
