@@ -51,29 +51,13 @@
 
                     <div class = "video_information_sub">
                         <div class = "video_information_sub_channel">
+                            <img src = "{{value['Img_channel']}}">
                             <a href = "http://www.naver.com" >{{value['channel_name']}}</a>
                         </div>
-                        <div class = "video_information_sub1">
-                            <div class ="video_information_sub2_1">
-                            <div class = "video_information_sub_good">
-                                <span class="material-icons">
-                                    thumb_up_alt
-                                </span>
-                                {{value['like']}}
-                            </div>
-
-                            <div class = "video_information_sub_view">
-                                <span class="material-icons">
-                                    visibility
-                                </span>
-                                {{value['view']}}
-                            </div>
-                            </div>
 
                             <div class = "video_information_sub2_2">
                                 {{value['uploadDate']}}
                             </div>
-                        </div>
                     </div>
                 </div>
             </list>
