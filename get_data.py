@@ -10,7 +10,7 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 def get_index_data() -> dict:
-    videos = db.child('video').child('Gaming').get()
+    videos = db.child('video').get()
     videos_list = videos.val()
     return videos_list
 
