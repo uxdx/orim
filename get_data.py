@@ -1,5 +1,6 @@
-import os
 import pyrebase
+
+import os
 
 # secrets.json 로딩
 config = os.environ.get('FIREBASE_CONFIG')
@@ -9,9 +10,6 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 def get_index_data() -> dict:
-    videos = db.child('video').child('Gaming').get()
+    videos = db.child('video').get()
     videos_list = videos.val()
     return videos_list
-
-if __name__ == '__main__':
-    print(get_index_data())

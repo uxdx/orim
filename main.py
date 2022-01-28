@@ -7,9 +7,6 @@ from get_data import get_index_data
 
 import os
 
-from secret_manager import access_secret
-
-
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_KEY')
