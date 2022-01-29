@@ -6,6 +6,8 @@ from get_data import get_index_data
 
 import os
 
+from secret_manager import access_secret
+
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -13,22 +15,20 @@ app.config['SESSION_TYPE'] = 'filesystem'
 # SCSS 세팅
 assets = Environment(app)
 assets.url = app.static_url_path # =static/
-print(app.static_url_path)
 scss = Bundle('scss/index.scss','scss/contents.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
 assets.register('scss_all', scss)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    service = os.environ.get('K_SERVICE', 'Unknown service')
-    revision = os.environ.get('K_REVISION', 'Unknown revision')
-    firebase_config = os.environ.get('FIREBASE_CONFIG')
+    # service = access_secret('K_SERVICE')
+    # revision = access_secret('K_REVISION')
+    firebase_config = access_secret('FIREBASE_CONFIG')
     video_list=get_index_data()
 
     return render_template('index.html',
         video_list=get_index_data(),
-        config=firebase_config,
-        Service=service,
-        Revision=revision)
+        config=firebase_config
+    )
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')

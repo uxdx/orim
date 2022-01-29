@@ -3,7 +3,7 @@ import pyrebase
 from secret_manager import access_secret
 
 # secrets.json 로딩
-config = access_secret()
+config = access_secret('FIREBASE_CONFIG')
 # 파이어베이스 인스턴스 생성
 firebase = pyrebase.initialize_app(config)
 # 데이터베이스 인스턴스 생성
