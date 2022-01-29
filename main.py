@@ -23,7 +23,6 @@ def index():
     # service = access_secret('K_SERVICE')
     # revision = access_secret('K_REVISION')
     firebase_config = access_secret('FIREBASE_CONFIG')
-    video_list=get_index_data()
 
     return render_template('index.html',
         video_list=get_index_data(),
