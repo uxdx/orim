@@ -1,11 +1,9 @@
 import pyrebase
 
-import os
-import json
+from secret_manager import access_secret
 
 # secrets.json 로딩
-config_env = os.environ.get('FIREBASE_CONFIG') # str
-config = json.loads(config_env)
+config = access_secret('FIREBASE_CONFIG')
 # 파이어베이스 인스턴스 생성
 firebase = pyrebase.initialize_app(config)
 # 데이터베이스 인스턴스 생성
@@ -21,3 +19,6 @@ def get_index_data() -> dict:
     videos_list.update(videos_list2)
     videos_list.update(videos_list3)
     return videos_list
+
+if __name__ == '__main__':
+    print(get_index_data())

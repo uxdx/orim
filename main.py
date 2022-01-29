@@ -7,12 +7,14 @@ from get_data import get_index_data
 
 import os
 
+from secret_manager import access_secret
+
 # 플라스크 앱 인스턴스 생성
 app = Flask(__name__)
-app.secret_key = os.environ.get('FLASK_KEY')
+app.secret_key = access_secret('FLASK_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'
-app.config['GOOGLE_OAUTH2_CLIENT_ID'] = os.environ.get('GOOGLE_OAUTH2_CLIENT_ID')
-app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET')
+app.config['GOOGLE_OAUTH2_CLIENT_ID'] = access_secret('GOOGLE_OAUTH2_CLIENT_ID')
+app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = access_secret('GOOGLE_OAUTH2_CLIENT_SECRET')
 oauth2 = UserOAuth2(app)
 
 # SCSS 세팅
@@ -23,15 +25,12 @@ assets.register('scss_all', scss)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    service = os.environ.get('K_SERVICE', 'Unknown service')
-    revision = os.environ.get('K_REVISION', 'Unknown revision')
-    firebase_config = os.environ.get('FIREBASE_CONFIG')
+    firebase_config = access_secret('FIREBASE_CONFIG')
 
     return render_template('index.html',
         video_list=get_index_data(),
-        config=firebase_config,
-        Service=service,
-        Revision=revision)
+        config=firebase_config
+    )
 
 @app.route('/test')
 @oauth2.required
