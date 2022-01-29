@@ -1,3 +1,5 @@
 secrets.json
 __pycache__/
 static/.webassets-cache/
+.readmes/
+.vscode/
