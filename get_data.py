@@ -1,6 +1,6 @@
 import pyrebase
 
-from secret_manager import access_secret
+from utils.secret_manager import access_secret
 
 # secrets.json 로딩
 config = access_secret('FIREBASE_CONFIG')
