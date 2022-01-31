@@ -1,18 +1,15 @@
 #Imports
-import os
-import pathlib
 import firebase_admin
 import pyrebase
 from firebase_admin import credentials, auth
 from flask import Blueprint, abort, redirect, request, session
 from google_auth_oauthlib.flow import Flow
-
 from google.oauth2 import id_token
 from pip._vendor import cachecontrol
-from rsa import sign
 
 from utils import access_secret
 
+import settings
 import requests
 import google.auth.transport.requests
 
@@ -24,12 +21,11 @@ cred = credentials.Certificate(access_secret("FIREBASE_ADMIN_CONFIG"))
 firebase = firebase_admin.initialize_app(cred)
 pb = pyrebase.initialize_app(access_secret('FIREBASE_CONFIG'))
 
-# # ! 수정필요
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent.parent, "client_secret.json")
-flow = Flow.from_client_secrets_file(
-    client_secrets_file=client_secrets_file,
+# google auth 인스턴스 생성
+flow =Flow.from_client_config(
+    client_config=access_secret('CLIENT_SECRET'),
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://localhost:8080/callback"
+    redirect_uri=settings.BASE_URL+ ':8080'+ '/callback'
 )
 
 
