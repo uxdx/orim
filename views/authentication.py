@@ -28,7 +28,7 @@ flow =Flow.from_client_config(
     redirect_uri=settings.BASE_URL+ ':8080'+ '/callback'
 )
 
-
+# Wrappers
 def login_is_required(function):
     def wrapper(*args, **kwargs):
         if "google_id" not in session:
@@ -39,7 +39,7 @@ def login_is_required(function):
     return wrapper
 
 
-
+# Functions
 def register(user_info:dict):
     try:
         auth.create_user(uid=user_info['sub'], email=user_info['email'], email_verified=user_info['email_verified'])
@@ -52,10 +52,14 @@ def signin(user_info:dict):
         auth.get_user(user_info['sub'])
     except auth.UserNotFoundError :
         print('user not found')
+        print('Go into Register.')
         register(user_info)
-        
     print('sign in succeed.')
 
+# Routes
+@bp.route("/authenticate")
+def authenticate():
+    return "Hello World <a href='/login'><button>Login</button></a>"
 
 @bp.route('/login')
 def login():
@@ -63,6 +67,11 @@ def login():
     session["state"] = state
 
     return redirect(authorization_url)
+
+@bp.route("/protected_area")
+@login_is_required
+def protected_area():
+    return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
 
 @bp.route("/callback")
 def callback():
@@ -85,31 +94,11 @@ def callback():
     # 세션에 저장해서 url이 바뀌어도 로그인상태가 유지
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    
-    signin(id_info)
-    return redirect("/protected_area")
 
+    signin(id_info)
+    return redirect("/")
 
 @bp.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
-
-@bp.route("/authenticate")
-def authenticate():
-    return "Hello World <a href='/login'><button>Login</button></a>"
-
-
-@bp.route("/protected_area")
-@login_is_required
-def protected_area():
-    return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
-
-
-
-if __name__ == "__main__":
-    # auth.create_user(uid='112959622972108502363', email='uxdx159@gmail.com', email_verified=True)
-    try:
-        auth.get_user('asdf')
-    except auth.UserNotFoundError :
-        print('user not found')
