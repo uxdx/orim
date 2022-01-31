@@ -25,7 +25,7 @@ pb = pyrebase.initialize_app(access_secret('FIREBASE_CONFIG'))
 flow =Flow.from_client_config(
     client_config=access_secret('CLIENT_SECRET'),
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri=settings.BASE_URL+ ':8080'+ '/callback'
+    redirect_uri=settings.BASE_URL + '/callback'
 )
 
 # Wrappers
