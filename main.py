@@ -28,14 +28,11 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 ### Routes ###
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    firebase_config = access_secret('FIREBASE_CONFIG')
-
     return render_template('index.html',
-        video_list=get_index_data(),
-        config=firebase_config
+        video_list=get_index_data()
     )
 
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=False, port=server_port, host='127.0.0.1')
+    app.run(debug=False, port=server_port, host='0.0.0.0')
