@@ -1,5 +1,4 @@
-import pathlib
-from flask import Flask, abort, redirect, render_template, request, session
+from flask import Flask, render_template
 from flask_assets import Environment, Bundle
 from get_data import get_index_data
 
