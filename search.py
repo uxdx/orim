@@ -18,4 +18,5 @@ firebase_admin.initialize_app(cred, {
 
 # As an admin, the app has access to read and write all data, regradless of Security Rules
 ref = db.reference('video')
-print(ref.get())
+snapshot = ref.order_by_key().get()
+print(snapshot)
