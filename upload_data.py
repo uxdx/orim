@@ -6,18 +6,18 @@ from datetime import datetime, timedelta
 import datetime
 import json
 
-
-DEVELOPER_KEY = ""
-YOUTUBE_API_SERVICE_NAME="youtube"
-YOUTUBE_API_VERSION="v3"
-youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
-
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
     jsonFile.close()
 config = secrets['config']
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
+
+DEVELOPER_KEY = secrets['API_KEY']
+YOUTUBE_API_SERVICE_NAME="youtube"
+YOUTUBE_API_VERSION="v3"
+youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
+
 
 def mostPopular():
     #카테고리 추가할 때 수정 필요
