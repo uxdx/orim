@@ -9,7 +9,7 @@ import json
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
     jsonFile.close()
-config = secrets['config']
+config = secrets['FIREBASE_CONFIG']
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
