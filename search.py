@@ -21,18 +21,14 @@ ref = db.reference('video')
 
 def category_group(category:str):
     snapshot = ref.order_by_child('category').equal_to(category).get()
-    for key in snapshot:
-        print(key)
     category_video=[]
-    for key in snapshot:
-        category_video.append(get_key_data(key))
+    for val in snapshot.values():
+        category_video.append(val)
     return category_video
 
 def channel_group(channel:str):
     snapshot = ref.order_by_child('channel_name').equal_to(channel).get()
-    for key in snapshot:
-        print(key)
-    category_video=[]
-    for key in snapshot:
-        category_video.append(get_key_data(key))
-    return category_video
+    channel_video=[]
+    for val in snapshot.values():
+        channel_video.append(val)
+    return channel_video
