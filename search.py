@@ -36,11 +36,3 @@ def channel_group(channel:str):
     for key in snapshot:
         category_video.append(get_key_data(key))
     return category_video
-
-
-
-        
-
-
-
-
