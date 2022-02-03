@@ -1,13 +1,13 @@
 import pyrebase
+import json
 
-from secret_manager import access_secret
-
-# secrets.json 로딩
-config = access_secret()
-# 파이어베이스 인스턴스 생성
+with open("secrets.json") as jsonFile:
+    secrets = json.load(jsonFile)
+    jsonFile.close()
+config = secrets['FIREBASE_CONFIG']
 firebase = pyrebase.initialize_app(config)
-# 데이터베이스 인스턴스 생성
 db = firebase.database()
+
 
 def get_index_data() -> dict:
     videos_Gaming = db.child('mostPopular').child('Gaming').get()
@@ -19,6 +19,12 @@ def get_index_data() -> dict:
     videos_list.update(videos_list2)
     videos_list.update(videos_list3)
     return videos_list
+
+def get_key_data(key:str) -> dict:
+    data = db.child('video').child(key).get()
+    video_list=data.val()
+    return video_list
+
 
 if __name__ == '__main__':
     print(get_index_data())
