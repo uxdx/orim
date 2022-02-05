@@ -17,7 +17,7 @@ app.register_blueprint(authentication.bp)
 # SCSS 세팅
 assets = Environment(app)
 assets.url = app.static_url_path # =static/
-scss = Bundle('scss/index.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
+scss = Bundle('scss/main.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
 assets.register('scss_all', scss)
 
 # Google oauth 설정
