@@ -1,5 +1,6 @@
 import pyrebase
 import json
+from search import Recently_category_group, Recently_channel_group
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
@@ -8,7 +9,7 @@ config = secrets['FIREBASE_CONFIG']
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
-
+# 메인 페이지용 함수
 def get_index_data() -> dict:
     videos_Gaming = db.child('mostPopular').child('Gaming').get()
     videos_list = videos_Gaming.val()
@@ -20,10 +21,21 @@ def get_index_data() -> dict:
     videos_list.update(videos_list3)
     return videos_list
 
+# key 입력 받아서 영상 가져오는 함수
 def get_key_data(key:str) -> dict:
     data = db.child('video').child(key).get()
     video_list=data.val()
     return video_list
+
+# 카테고리 모아보기 정확한 입력 필요
+def get_category_data(category:str) -> dict:
+    videos_list=Recently_category_group(category)
+    return videos_list
+
+# 채널 모아보기 정확한 입력 필요
+def get_channel_data(channel:str) -> dict:
+    videos_list=Recently_channel_group(channel)
+    return videos_list
 
 if __name__ == '__main__':
     print(get_index_data())

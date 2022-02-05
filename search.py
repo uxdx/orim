@@ -2,7 +2,6 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 import json
-from get_data import get_key_data
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
@@ -39,3 +38,44 @@ def title_group(title:str):
     for val in snapshot.values():
         title_video.append(val)
     return title_video
+
+
+def Recently_uploadDate(videolist:list):
+    a=dict()
+    j=0
+    for i in videolist:
+        a[i['uploadDate']]=j
+        j+=1
+    b=sorted(a.items(),reverse=True)
+    c=[]
+    for i in b:
+        c.append(i[1])
+    d=[]
+    for i in c:
+        d.append(videolist[i])
+    return d
+
+def old_uploadDate(videolist:list):
+    a=dict()
+    j=0
+    for i in videolist:
+        a[i['uploadDate']]=j
+        j+=1
+    b=sorted(a.items(),reverse=False)
+    c=[]
+    for i in b:
+        c.append(i[1])
+    d=[]
+    for i in c:
+        d.append(videolist[i])
+    return d
+
+def Recently_category_group(category):
+    data=category_group(category)
+    video=Recently_uploadDate(data)
+    return video
+
+def Recently_channel_group(channel):
+    data=channel_group(channel)
+    video=Recently_uploadDate(data)
+    return video
