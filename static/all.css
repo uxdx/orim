@@ -30,3 +30,73 @@ body {
               grid-template-columns: 2fr 1fr; }
               .top .drawer .drawer_top h2 {
                 margin: 25; }
+
+.main_video_line {
+  margin: 50px;
+  padding: 0px;
+  width: 1500px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; }
+  .main_video_line .main_video_category {
+    width: 400px;
+    padding: 0px; }
+
+.yt_video {
+  display: inline-grid;
+  grid-template-rows: 300px 1fr;
+  border: solid gray 1px;
+  margin-bottom: 10px;
+  height: 400px; }
+  .yt_video .video_thumbnail {
+    display: inline;
+    list-style: none;
+    width: 400px;
+    height: 300px;
+    border-bottom: solid gray 1px; }
+    .yt_video .video_thumbnail img {
+      border: 3px solid none;
+      width: 400px;
+      height: 300px; }
+  .yt_video .video_information_title {
+    font-size: 18px;
+    width: 380px;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+    .yt_video .video_information {
+      font-size: 10px;
+      height: 80px;
+      margin: 10px;
+      display: inline-grid;
+      grid-template-rows: 1fr 1fr; }
+      .yt_video .video_information .material-icons {
+        font-size: 15px; }
+        .yt_video .video_information .video_information_sub {
+          display: inline-grid;
+          grid-template-columns: 6fr 4fr;
+          width: 380px;
+          font-size: 15px; }
+          .yt_video .video_information .video_information_sub .video_information_sub_channel {
+            display: inline-grid;
+            grid-template-columns: 1fr 4fr; }
+            .yt_video .video_information .video_information_sub .video_information_sub_channel img {
+              width: 30px;
+              height: 30px;
+              border-radius: 70%;
+              overflow: hidden;
+              border: 1px solid gray;
+              margin-top: 4px;
+              margin-bottom: 4px; }
+              .yt_video .video_information .video_information_sub .video_information_sub_channel a {
+                width: 150px;
+                height: 20px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-top: 10px;
+                margin-bottom: 10px; }
+          .yt_video .video_information .video_information_sub .video_information_sub2_2 {
+            font-size: 15px;
+            margin-top: 10px;
+            margin-bottom: 10px; }

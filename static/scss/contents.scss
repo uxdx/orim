@@ -1,7 +1,13 @@
 .main_video_line{
     margin : 50px;
     padding: 0px;
-
+    width : 1500px;
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .main_video_category{
+        width : 400px;
+        padding : 0px;
+    }
 }
 
 .yt_video{
