@@ -5,3 +5,5 @@ flask_assets
 pyrebase4
 firebase_admin
 google-cloud-secret-manager
+google-auth
+google-auth-oauth
