@@ -25,6 +25,5 @@ def get_key_data(key:str) -> dict:
     video_list=data.val()
     return video_list
 
-
 if __name__ == '__main__':
     print(get_index_data())

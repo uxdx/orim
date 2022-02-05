@@ -32,3 +32,10 @@ def channel_group(channel:str):
     for val in snapshot.values():
         channel_video.append(val)
     return channel_video
+
+def title_group(title:str):
+    snapshot = ref.order_by_child('title').equal_to(title).get()
+    title_video=[]
+    for val in snapshot.values():
+        title_video.append(val)
+    return title_video
