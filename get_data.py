@@ -27,12 +27,12 @@ def get_key_data(key:str) -> dict:
     video_list=data.val()
     return video_list
 
-# 카테고리 모아보기 정확한 입력 필요
+# 카테고리 모아보기 정확한 입력 필요 최근 업로드 순
 def get_category_data(category:str) -> dict:
     videos_list=Recently_category_group(category)
     return videos_list
 
-# 채널 모아보기 정확한 입력 필요
+# 채널 모아보기 정확한 입력 필요 최근 업로드 순
 def get_channel_data(channel:str) -> dict:
     videos_list=Recently_channel_group(channel)
     return videos_list
