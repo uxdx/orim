@@ -39,6 +39,7 @@ def get_channel_data(channel:str) -> dict:
     return videos_list
 
 # 검색 분류, 검색어 입력 필요
+# 검색 분류에는 (제목:title, 채널: channel_name) 중 택 1
 def get_search_data(pattern:str, group:str):
     videos_list=search(pattern, group)
     return videos_list
