@@ -1,6 +1,7 @@
 import pyrebase
 import json
 from search import Recently_category_group, Recently_channel_group
+from search_al import search
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
@@ -35,6 +36,11 @@ def get_category_data(category:str) -> dict:
 # 채널 모아보기 정확한 입력 필요 최근 업로드 순
 def get_channel_data(channel:str) -> dict:
     videos_list=Recently_channel_group(channel)
+    return videos_list
+
+# 검색 분류, 검색어 입력 필요
+def get_search_data(pattern:str, group:str):
+    videos_list=search(pattern, group)
     return videos_list
 
 if __name__ == '__main__':

@@ -1,3 +1,6 @@
+import pyrebase
+import json
+
 def boyer_moore(pattern, text):
     #길이를 자주쓰므로 길이를 받아둔다.
     M = len(pattern)
@@ -40,3 +43,28 @@ def find(pattern, char):
             return len(pattern) -i -1
     #일치하는 글자가 없다면 패턴의 길이만큼 이동한다.
     return len(pattern)
+
+with open("secrets.json") as jsonFile:
+    secrets = json.load(jsonFile)
+    jsonFile.close()
+config = secrets['FIREBASE_CONFIG']
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+
+def get_search_data() -> dict:
+    videos = db.child('video').get()
+    videos_list = videos.val()
+    return videos_list
+
+def search(pattern:str, group:str):
+    data_dict=get_search_data()
+    data_list=list(data_dict.values())
+    search_result=[]
+    for i in data_list:
+        text=i[group]
+        if boyer_moore(pattern, text):
+            search_result.append(i)
+    return search_result
+
+a=search('2부에서도', 'title')
+print(a)
