@@ -66,5 +66,4 @@ def search(pattern:str, group:str):
             search_result.append(i)
     return search_result
 
-a=search('2부에서도', 'title')
-print(a)
+
