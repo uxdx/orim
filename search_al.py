@@ -56,12 +56,22 @@ def get_search_data() -> dict:
     videos_list = videos.val()
     return videos_list
 
-def search(pattern:str, group:str):
+def search_title(pattern:str):
     data_dict=get_search_data()
     data_list=list(data_dict.values())
     search_result=[]
     for i in data_list:
-        text=i[group]
+        text=i['title']
+        if boyer_moore(pattern, text):
+            search_result.append(i)
+    return search_result
+
+def search_channel_name(pattern:str):
+    data_dict=get_search_data()
+    data_list=list(data_dict.values())
+    search_result=[]
+    for i in data_list:
+        text=i['channel_name']
         if boyer_moore(pattern, text):
             search_result.append(i)
     return search_result
