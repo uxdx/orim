@@ -23,29 +23,44 @@ def get_index_data() -> dict:
     return videos_list
 
 # key 입력 받아서 영상 가져오는 함수
-def get_video_by_vid(key:str) -> dict:
-    data = db.child('video').child(key).get()
-    video_list=data.val()
+def get_video_by_vid(key:str=None):
+    if key==None:
+        video_list=[]
+    else:
+        data = db.child('video').child(key).get()
+        video_list=data.val()
     return video_list
 
 # 카테고리 모아보기 정확한 입력 필요 최근 업로드 순
-def get_videos_by_category(category:str) -> dict:
-    videos_list=Recently_category_group(category)
-    return videos_list
+def get_videos_by_category(category:str=None):
+    if category==None:
+        video_list=[]
+    else:
+        video_list=Recently_category_group(category)
+    return video_list
 
 # 채널 모아보기 정확한 입력 필요 최근 업로드 순
-def get_videos_by_channel_name(channel:str) -> dict:
-    videos_list=Recently_channel_group(channel)
-    return videos_list
+def get_videos_by_channel_name(channel:str=None):
+    if channel==None:
+        video_list=[]
+    else:
+        video_list=Recently_channel_group(channel)
+    return video_list
 
 # 검색어 입력 필요(데이터베이스에서 검색)
-def get_video_by_search_title(pattern:str):
-    videos_list=search_title(pattern)
-    return videos_list
+def get_videos_by_search_title(pattern:str=None):
+    if pattern==None:
+        video_list=[]
+    else:
+        video_list=search_title(pattern)
+    return video_list
 
-def get_video_by_search_channel_name(pattern:str):
-    videos_list=search_channel_name(pattern)
-    return videos_list
+def get_videos_by_search_channel_name(pattern:str=None):
+    if pattern==None:
+        video_list=[]
+    else:
+        video_list=search_channel_name(pattern)
+    return video_list
 
 if __name__ == '__main__':
     print(get_index_data())
