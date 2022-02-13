@@ -7,6 +7,9 @@
             </span></button>
 
         <div class="drawer">
+            <div>
+                <a href="#" onclick="signOut();">Sign out</a>
+            </div>
             <div class = "drawer_top">
                 <h2>MEUN</h2>
                 <h2><button type="button" class="drawer-opener" ><span class="material-icons">
@@ -31,37 +34,106 @@
             </ul>
         </div>
         <h1>Orim</h1>
-        <a class = "sign in" href = "http://www.naver.com">sign in</a> 
+        <a class = "sign in" href = "https://orim-exa2k3vk2q-du.a.run.app/login">sign in</a> 
     </div>
 
     <ol class = "main_video_line" >
-    {% for key, value in video_list.items()%}
-        
-            <list class = "yt_video" id="main_no_1">
-                <div class = "video_thumbnail">                   
-                    <a href = "{{value['url']}}" target = "_blank">
-                        <img src = "{{value['thumbnail']}}">
-                    </a><br>
-                </div>
-
-                <div class = "video_information">
-                    <div class = "video_information_title">
-                        <a href = "http://www.naver.com" >{{value['title']}}</a>
-                    </div>
-
-                    <div class = "video_information_sub">
-                        <div class = "video_information_sub_channel">
-                            <img src = "{{value['Img_channel']}}">
-                            <a href = "http://www.naver.com" >{{value['channel_name']}}</a>
+        <ol class = "main_video_category">
+            {% for key, value in video_list.items()%}
+                
+                {%if value['category'] == 'Gaming'%}        
+                    <list class = "yt_video">
+                        <div class = "video_thumbnail">                   
+                            <a href = "{{value['url']}}" target = "_blank">
+                                <img src = "{{value['thumbnail']}}">
+                            </a><br>
                         </div>
 
-                            <div class = "video_information_sub2_2">
-                                {{value['uploadDate']}}
+                        <div class = "video_information">
+                            <div class = "video_information_title">
+                                <a href = "http://www.naver.com" >{{value['title']}}</a>
                             </div>
-                    </div>
-                </div>
-            </list>
 
-        {% endfor%}
+                            <div class = "video_information_sub">
+                                <div class = "video_information_sub_channel">
+                                    <img src = "{{value['Img_channel']}}">
+                                    <a href = "http://www.naver.com" >{{value['channel_name']}}</a>
+                                </div>
+
+                                    <div class = "video_information_sub2_2">
+                                        {{value['uploadDate']}}
+                                    </div>
+                            </div>
+                        </div>
+                    </list>
+                {%endif%}
+
+            {%endfor%}
+        </ol>       
+        <ol class = "main_video_category">
+            {% for key, value in video_list.items()%}
+                
+                {%if value['category'] == 'Music'%}        
+                    <list class = "yt_video">
+                        <div class = "video_thumbnail">                   
+                            <a href = "{{value['url']}}" target = "_blank">
+                                <img src = "{{value['thumbnail']}}">
+                            </a><br>
+                        </div>
+
+                        <div class = "video_information">
+                            <div class = "video_information_title">
+                                <a href = "http://www.naver.com" >{{value['title']}}</a>
+                            </div>
+
+                            <div class = "video_information_sub">
+                                <div class = "video_information_sub_channel">
+                                    <img src = "{{value['Img_channel']}}">
+                                    <a href = "http://www.naver.com" >{{value['channel_name']}}</a>
+                                </div>
+
+                                    <div class = "video_information_sub2_2">
+                                        {{value['uploadDate']}}
+                                    </div>
+                            </div>
+                        </div>
+                    </list>
+                {%endif%}
+                
+            {%endfor%}
+        </ol>   
+        <ol class = "main_video_category">
+            {% for key, value in video_list.items()%}
+                
+                {%if value['category'] == 'Sports'%}        
+                    <list class = "yt_video">
+                        <div class = "video_thumbnail">                   
+                            <a href = "{{value['url']}}" target = "_blank">
+                                <img src = "{{value['thumbnail']}}">
+                            </a><br>
+                        </div>
+
+                        <div class = "video_information">
+                            <div class = "video_information_title">
+                                <a href = "http://www.naver.com" >{{value['title']}}</a>
+                            </div>
+
+                            <div class = "video_information_sub">
+                                <div class = "video_information_sub_channel">
+                                    <img src = "{{value['Img_channel']}}">
+                                    <a href = "http://www.naver.com" >{{value['channel_name']}}</a>
+                                </div>
+
+                                    <div class = "video_information_sub2_2">
+                                        {{value['uploadDate']}}
+                                    </div>
+                            </div>
+                        </div>
+                    </list>
+                {%endif%}
+                
+            {%endfor%}
+        </ol>               
+        
     </ol> 
 {% endblock %}

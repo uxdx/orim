@@ -68,11 +68,6 @@ def login():
 
     return redirect(authorization_url)
 
-@bp.route("/protected_area")
-@login_is_required
-def protected_area():
-    return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
-
 @bp.route("/callback")
 def callback():
     flow.fetch_token(authorization_response=request.url)
