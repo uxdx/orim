@@ -21,11 +21,18 @@ YOUTUBE_API_SERVICE_NAME="youtube"
 YOUTUBE_API_VERSION="v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
+# 아직 미완
 def recommend(videoid:str, userid:str):
+    time_data=datetime.datetime.now()
+    time=time_data.strftime('%Y-%m-%d %H:%M:%S')
     db.child('recommend').child(videoid).update({
-        userid:datetime.datetime.now()
+        userid:time
     })
+    data=db.child('recommend').child(videoid).get()
+    for i in data.val():
+        return 0
 
+# 유튜브 api 검색 O/X는 db에 영상 유무
 def youtube_search(keyword:str):
     Information = youtube.search().list(
     part='snippet',
