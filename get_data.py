@@ -24,12 +24,25 @@ def get_index_data() -> dict:
 
 # key 입력 받아서 영상 가져오는 함수
 def get_video_by_vid(key:str=None):
+    key_list=['title','uploadDate','videoId','url','thumbnail','category','channel_name','channelId','channelurl','Img_channel']
+    response=[]
     if key==None:
         video_list=[]
     else:
         data = db.child('video').child(key).get()
         video_list=data.val()
-    return video_list
+        response.append(video_list['title'])
+        response.append(video_list['uploadDate'])
+        response.append(video_list['videoId'])
+        response.append(video_list['url'])
+        response.append(video_list['thumbnail'])
+        response.append(video_list['category'])
+        response.append(video_list['channel_name'])
+        response.append(video_list['channelId'])
+        response.append(video_list['channelurl'])
+        response.append(video_list['Img_channel'])
+        result=dict(zip(key_list,response))
+    return result
 
 # 카테고리 모아보기 정확한 입력 필요 최근 업로드 순
 def get_videos_by_category(category:str=None):
