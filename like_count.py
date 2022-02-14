@@ -14,6 +14,7 @@ config = secrets['FIREBASE_CONFIG']
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
+# 좋아요 누를 때
 def like_count(userid:str, videoid:str):
     db.child('like').child('user').child(userid).update({
         videoid:1
@@ -22,6 +23,7 @@ def like_count(userid:str, videoid:str):
         userid:1
     })
 
+# video에 좋아요 누를 사람 숫자
 def get_like_video(videoid:str):
     like = db.child('like').child('video').child(videoid).get()
     like_dic = like.val()
@@ -30,6 +32,7 @@ def get_like_video(videoid:str):
         like_count+=1
     return like_count
 
+# user가 누른 좋아요 동영상
 def get_like_user(userid:str):
     like = db.child('like').child('user').child(userid).get()
     like_dic = like.val()
