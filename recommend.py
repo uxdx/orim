@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import datetime
 import json
 from upload_data import channel
+from search import videoid_group
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
@@ -20,8 +21,9 @@ YOUTUBE_API_SERVICE_NAME="youtube"
 YOUTUBE_API_VERSION="v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
-def recommend(videoid:str):
-    db.child('recommend').child('videoid').child().update({
+def recommend(videoid:str, userid:str):
+    db.child('recommend').child(videoid).update({
+        userid:datetime.datetime.now()
     })
 
 def youtube_search(keyword:str):
@@ -32,7 +34,7 @@ def youtube_search(keyword:str):
     maxResults=5,
     q=f'{keyword}'
     ).execute()
-    key_list=['title','uploadDate','videoId','thumbnail','channel_name','channelId','Img_channel']
+    key_list=['title','uploadDate','videoId','thumbnail','channel_name','channelId','Img_channel','O/X']
     result=[]
     for i in range(5):
         response=[]
@@ -49,5 +51,9 @@ def youtube_search(keyword:str):
         response.append(Information['items'][i]['snippet']['channelId'])
         channelID=Information['items'][i]['snippet']['channelId']
         response.append(channel(channelID))
+        if videoid_group(videoid):
+            response.append('O')
+        else:
+            response.append('X')
         result.append(dict(zip(key_list,response)))
     return result

@@ -75,7 +75,6 @@ def get_videos_by_search_channel_name(pattern:str=None):
         video_list=search_channel_name(pattern)
     return video_list
 
-# if __name__ == '__main__':
-#     print(get_index_data())
+if __name__ == '__main__':
+    print(get_index_data())
 
-print(get_video_by_vid('lrzISkKt2wI'))

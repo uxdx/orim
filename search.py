@@ -39,6 +39,13 @@ def title_group(title:str):
         title_video.append(val)
     return title_video
 
+def videoid_group(videoid:str):
+    snapshot = ref.order_by_child('videoId').equal_to(videoid).get()
+    videoid_video=[]
+    for val in snapshot.values():
+        videoid_video.append(val)
+    return videoid_video
+
 
 def Recently_uploadDate(videolist:list):
     a=dict()
