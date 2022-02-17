@@ -22,11 +22,13 @@ YOUTUBE_API_SERVICE_NAME="youtube"
 YOUTUBE_API_VERSION="v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
+# 스포츠 게임 음악 이외의 카테고리 올라오는 경우 생길수 있다.
 with open("category.json") as jsonFile:
     all_category = json.load(jsonFile)
     jsonFile.close()
 category_dict=all_category['category']
 
+# 추천하기 눌렸을때 추천 정보 저장, 24시간 이내 추천 정보가 5개 넘어갈 경우 db에 동영상 정보 저장
 def recommend(videoid:str, userid:str):
     time_data=datetime.datetime.now()
     time=time_data.strftime('%Y-%m-%d %H:%M:%S')
@@ -66,6 +68,7 @@ def recommend(videoid:str, userid:str):
 
 
 # 유튜브 api 검색 O/X는 db에 영상 유무
+# 유튜브에서 검색해서 추천하기
 def youtube_search(keyword:str):
     Information = youtube.search().list(
     part='snippet',
@@ -97,5 +100,3 @@ def youtube_search(keyword:str):
             response.append('X')
         result.append(dict(zip(key_list,response)))
     return result
-
-recommend('GFY3rUFNrOU','userid2')

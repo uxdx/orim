@@ -23,7 +23,8 @@ def like_count(userid:str, videoid:str):
         userid:1
     })
 
-# video에 좋아요 누를 사람 숫자
+# video에 좋아요 누른 사람 숫자
+# 유튜브 좋아요 x
 def get_like_video(videoid:str):
     like = db.child('like').child('video').child(videoid).get()
     like_dic = like.val()
