@@ -18,6 +18,10 @@ YOUTUBE_API_SERVICE_NAME="youtube"
 YOUTUBE_API_VERSION="v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
+with open("category.json") as jsonFile:
+    all_category = json.load(jsonFile)
+    jsonFile.close()
+category_dict=all_category['category']
 
 def mostPopular():
     #카테고리 추가할 때 수정 필요
@@ -55,13 +59,8 @@ def mostPopular():
             #     response.append("NULL")
             # response.append(Information['items'][i]['statistics']['viewCount'])
             
-            #카테고리 추가할 때 수정 필요
-            if CTGR==10:
-                response.append('Music')
-            elif CTGR==17:
-                response.append('Sports')
-            else:
-                response.append('Gaming')
+            #카테고리 추가할 때 수정 필요 이거 수정필요 없도록 고쳐야함
+            response.append(category_dict[Information['items'][i]['snippet']['categoryId']])
             response.append(Information['items'][i]['snippet']['channelTitle'])
             response.append(f"{CTGR}"+rank[i])
             response.append(Information['items'][i]['snippet']['channelId'])
