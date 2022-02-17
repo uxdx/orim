@@ -36,7 +36,7 @@ def recommend(videoid:str, userid:str):
     })
     data=db.child('recommend').child(videoid).get()
     for i in data.val():
-        if datetime.datetime.strptime(data.val()[i], '%Y-%m-%d %H:%M:%S')>=datetime.datetime.now()-timedelta(hours=-24):
+        if datetime.datetime.strptime(data.val()[i], '%Y-%m-%d %H:%M:%S')>=datetime.datetime.now()+timedelta(hours=-24):
             amount+=1
         else:
             db.child('recommend').child(videoid).child(i).remove()
@@ -45,7 +45,7 @@ def recommend(videoid:str, userid:str):
             part='snippet',
             id=videoid
             ).execute()
-        publishedAt=Information['items'][i]['snippet']['publishedAt']
+        publishedAt=Information['items'][0]['snippet']['publishedAt']
         publishedAt = publishedAt.replace("T"," ")
         publishedAt = publishedAt.replace("Z","")
         publishedAt = datetime.datetime.strptime(publishedAt, '%Y-%m-%d %H:%M:%S') - timedelta(hours=-9)
@@ -55,9 +55,8 @@ def recommend(videoid:str, userid:str):
             'title':Information['items'][0]['snippet']['title'],
             'uploadDate': publishedAt.__str__(),
             'url':f'https://www.youtube.com/embed/{videoid}',
-            'thumbnail': Information['items'][0]['snippet']['thumbnails']['high'],
+            'thumbnail': Information['items'][0]['snippet']['thumbnails']['high']['url'],
             'category': category_dict[categoryId],
-            # 카테고리 정보 가져와야 겠네
             'channel_name': Information['items'][0]['snippet']['channelTitle'],
             'videoId': videoid,
             'channelId': Information['items'][0]['snippet']['channelId'],
@@ -98,3 +97,5 @@ def youtube_search(keyword:str):
             response.append('X')
         result.append(dict(zip(key_list,response)))
     return result
+
+recommend('GFY3rUFNrOU','userid2')
