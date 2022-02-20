@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        {% include 'shares/_head.html' %}
+      <title>orim - home</title>
+    </head>
+
+    <body>
+        {% include 'shares/_top.html' %}
+
+        {% include 'shares/_search.html' %}
+
+        <ol class = "main_video_line" >
+            <ol class = "main_video_category">
+                <p>Gaming</p>
+                {% for key, value in video_list.items()%}
+                    
+                    {%if value['category'] == 'Gaming'%}        
+                        {% include 'home/_main_video.html' %}
+                    {%endif%}
+    
+                {%endfor%}
+            </ol>       
+            <ol class = "main_video_category">
+                <p>Music</p>
+                {% for key, value in video_list.items()%}
+                    
+                    {%if value['category'] == 'Music'%}        
+                        {% include 'home/_main_video.html' %}
+                    {%endif%}
+                    
+                {%endfor%}
+            </ol>   
+            <ol class = "main_video_category">
+                <p>Sports</p>
+                {% for key, value in video_list.items()%}
+                    
+                    {%if value['category'] == 'Sports'%}        
+                        {% include 'home/_main_video.html' %}
+                    {%endif%}
+                    
+                {%endfor%}
+            </ol>               
+            
+        </ol> 
+        
+        {% include 'shares/_footer.html' %}
+
+        {% include 'shares/_script.html' %}
+        
+        
+    </body>
+</html>

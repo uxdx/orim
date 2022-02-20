@@ -1,0 +1,17 @@
+.video_interface{
+    display : grid;
+    justify-content: center;
+    margin-top:70px;
+    margin-left: auto;
+    margin-right:auto;
+    .video_interface_sub_channel{
+        img{
+            width:40px;
+            height:40px;
+            border-radius: 70%;
+            overflow: hidden;
+
+
+            }
+    }
+}

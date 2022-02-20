@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from flask_assets import Environment, Bundle
-from get_data import get_index_data
 
 import os
+from settings import BASE_URL
 
 from utils.secret_manager import access_secret
 # 플라스크 앱 인스턴스 생성
@@ -11,28 +11,26 @@ app.secret_key = access_secret('FLASK_KEY')
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['GOOGLE_OAUTH2_CLIENT_ID'] = access_secret('GOOGLE_OAUTH2_CLIENT_ID')
 app.config['GOOGLE_OAUTH2_CLIENT_SECRET'] = access_secret('GOOGLE_OAUTH2_CLIENT_SECRET')
-from views import authentication
+
+from views import home, authentication, detail, profile, search
 app.register_blueprint(authentication.bp)
+app.register_blueprint(home.bp)
+app.register_blueprint(detail.bp)
+app.register_blueprint(profile.bp)
+app.register_blueprint(search.bp)
 
 # SCSS 세팅
 assets = Environment(app)
 assets.url = app.static_url_path # =static/
-scss = Bundle('scss/index.scss', filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
+scss = Bundle('scss/main.scss', depends=('scss/*.scss'), filters='pyscss', output='all.css') # all.css 로 컴파일되서 assets.url(static/)에 저장됨
 assets.register('scss_all', scss)
+assets.manifest = False
+assets.cache = False
 
 # Google oauth 설정
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 
-
-### Routes ###
-@app.route('/', methods=['POST', 'GET'])
-def index():
-    return render_template('index.html',
-        video_list=get_index_data()
-    )
-
-
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
-    app.run(debug=False, port=server_port, host='0.0.0.0')
+    app.run(debug=False, port=server_port, host='localhost')    

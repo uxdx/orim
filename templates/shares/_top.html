@@ -1,0 +1,36 @@
+<div class = "top">
+    <button type="button" class="drawer-opener" ><span class="material-icons">
+        menu
+        </span></button>
+
+    <div class="drawer">
+        {{name}}
+        <div>
+            <a href="{{base_url}}/logout">Sign out</a>
+        </div>
+        <div class = "drawer_top">
+            <h2>MEUN</h2>
+            <h2><button type="button" class="drawer-opener" ><span class="material-icons">
+                menu
+                </span></button></h2>
+        </div>
+
+        <ul class = "menu_all">
+            <input id = 'night_day' type="button" value="dark" onclick="daynighthandle(this)">
+            <br>
+            <list>
+                <label>카테고리</label>
+                <ul> 
+                    <li><a href = "http://www.naver.com">영화</a></li>
+                    <li><a href = "http://www.naver.com">코미디</a></li>
+                    <li><a href = "http://www.naver.com">동물</a></li>
+                    <li><a href = "http://www.naver.com">게임</a></li>
+                    <li><a href = "http://www.naver.com">스포츠</a></li>
+                    <li><a href = "http://www.naver.com">쇼츠</a></li>
+                </ul>
+            </list>
+        </ul>
+    </div>
+    <h1>Orim</h1>
+    <a class = "sign in" href = "{{base_url}}/login">sign in</a> 
+</div>

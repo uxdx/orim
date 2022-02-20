@@ -1,0 +1,24 @@
+<list class = "yt_video">
+    <div class = "video_thumbnail">                   
+        <a href = "{{base_url}}/video?vid={{value['videoId']}}" target = "_blank">
+            <img src = "{{value['thumbnail']}}">
+        </a><br>
+    </div>
+
+    <div class = "video_information">
+        <div class = "video_information_title">
+            <a href = "{{base_url}}/video?vid={{value['videoId']}}" >{{value['title']}}</a>
+        </div>
+
+        <div class = "video_information_sub">
+            <div class = "video_information_sub_channel">
+                <img src = "{{value['Img_channel']}}">
+                <a href = "{{base_url}}/video?vid={{value['videoId']}}" >{{value['channel_name']}}</a>
+            </div>
+
+                <div class = "video_information_sub2_2">
+                    {{value['uploadDate']}}
+                </div>
+        </div>
+    </div>
+</list>

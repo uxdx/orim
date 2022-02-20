@@ -25,7 +25,7 @@ pb = pyrebase.initialize_app(access_secret('FIREBASE_CONFIG'))
 flow =Flow.from_client_config(
     client_config=access_secret('CLIENT_SECRET'),
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri=settings.BASE_URL + '/callback'
+    redirect_uri=settings.BASE_URL+ ':8080'+ '/callback'
 )
 
 # Wrappers
@@ -67,11 +67,6 @@ def login():
     session["state"] = state
 
     return redirect(authorization_url)
-
-@bp.route("/protected_area")
-@login_is_required
-def protected_area():
-    return f"Hello {session['name']}! <br/> <a href='/logout'><button>Logout</button></a>"
 
 @bp.route("/callback")
 def callback():

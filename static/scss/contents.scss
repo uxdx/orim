@@ -1,7 +1,21 @@
 .main_video_line{
-    margin : 50px;
-    padding: 0px;
-
+    
+    margin-top : 50px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    padding-left : 0px;
+    width : 1400px;
+    display : grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .main_video_category{
+        width : 400px;
+        padding : 0px;
+        p{
+            margin : 2px;
+            font-size:  18px;
+        }
+    }
 }
 
 .yt_video{

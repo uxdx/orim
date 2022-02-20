@@ -6,4 +6,4 @@ pyrebase4
 firebase_admin
 google-cloud-secret-manager
 google-auth
-google_auth_oauthlib
+google-auth-oauth
