@@ -24,8 +24,6 @@ def get_index_data() -> dict:
     list_Sports=videos_Sports.values()
     return list_Gaming, list_Music, list_Sports
 
-print(get_index_data())
-
 # key 입력 받아서 영상 가져오는 함수
 def get_video_by_vid(key:str=None):
     if key==None:
