@@ -17,10 +17,12 @@ firebase_admin.initialize_app(cred, {
 def get_index_data() -> dict:
     ref = db.reference('mostPopular')
     videos_Gaming = ref.child('Gaming').get()
+    list_Gaming=videos_Gaming.values()
     videos_Music = ref.child('Music').get()
+    list_Music=videos_Music.values()
     videos_Sports = ref.child('Sports').get()
-    videos_list=[videos_Gaming,videos_Music,videos_Sports]
-    return videos_list
+    list_Sports=videos_Sports.values()
+    return list_Gaming, list_Music, list_Sports
 
 print(get_index_data())
 
