@@ -1,4 +1,6 @@
-import pyrebase
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 import datetime
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -9,9 +11,12 @@ import json
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
     jsonFile.close()
-config = secrets['FIREBASE_CONFIG']
-firebase = pyrebase.initialize_app(config)
-db = firebase.database()
+
+cred = credentials.Certificate(secrets['FIREBASE_ADMIN_CONFIG'])
+
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://jinho-337705-default-rtdb.asia-southeast1.firebasedatabase.app/'
+})
 
 DEVELOPER_KEY = secrets['API_KEY']
 YOUTUBE_API_SERVICE_NAME="youtube"
@@ -22,6 +27,9 @@ with open("category.json") as jsonFile:
     all_category = json.load(jsonFile)
     jsonFile.close()
 category_dict=all_category['category']
+
+ref_video = db.reference('video')
+ref_mostPopular = db.reference('mostPopular')
 
 def mostPopular():
     #카테고리 추가할 때 수정 필요
@@ -72,7 +80,7 @@ def mostPopular():
 
 #메인 페이지 db
 def upload_main_video(title:str, uploadDate:datetime.datetime ,videoId:str,url:str,thumbnail:str,category:str, channel_name:str,Ranking:int,channelId:str,channelurl:str,Img_channel:str):
-    db.child('mostPopular').child(category).child(Ranking).update({
+    ref_mostPopular.child(category).child(Ranking).update({
         'title':title,
         'uploadDate': uploadDate.__str__(),
         'url':url,
@@ -87,7 +95,7 @@ def upload_main_video(title:str, uploadDate:datetime.datetime ,videoId:str,url:s
 
 #전체 db
 def upload_video(title:str, uploadDate:datetime.datetime ,videoId:str,url:str,thumbnail:str, category:str, channel_name:str, Ranking:int, channelId:str,channelurl:str,Img_channel:str):
-    db.child('video').child(videoId).update({
+    ref_video.child(videoId).update({
         'title':title,
         'uploadDate': uploadDate.__str__(),
         'url':url,
@@ -116,6 +124,7 @@ def channel(channelID:str):
                 ).execute()
     channelurl=Information['items'][0]['snippet']['thumbnails']['default']['url']
     return channelurl
+
 
 if __name__ == '__main__':
     pass
