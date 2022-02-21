@@ -14,13 +14,14 @@ firebase_admin.initialize_app(cred, {
 })
 
 # 유저 정보 저장 수정 가능
-def save_User_data(UserID:str, E_mail:str, Nickname:str, OX:str):
+def save_User_data(uid:str ,registered_date:str, email:str, name:str, email_verified:bool):
     ref = db.reference('User')
-    ref.child(UserID).update({
-        'UserID':UserID,
-        'e-mail':E_mail,
-        'Nickname':Nickname,
-        'OX':OX
+    ref.child(uid).update({
+        'uid':uid,
+        'email':email,
+        'name':name,
+        'email_verified':email_verified,
+        'registered_date':registered_date
     })
 
 # save_User('UserID','e-mail','Nickname','O')
