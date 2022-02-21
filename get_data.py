@@ -19,8 +19,10 @@ def get_index_data() -> dict:
     videos_Gaming = ref.child('Gaming').get()
     videos_Music = ref.child('Music').get()
     videos_Sports = ref.child('Sports').get()
-    videos_list={'Gaming':videos_Gaming,'Music':videos_Music,'Sports':videos_Sports}
+    videos_list=[videos_Gaming,videos_Music,videos_Sports]
     return videos_list
+
+print(get_index_data())
 
 # key 입력 받아서 영상 가져오는 함수
 def get_video_by_vid(key:str=None):
