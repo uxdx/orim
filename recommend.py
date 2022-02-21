@@ -1,21 +1,21 @@
-from itertools import count
-import pyrebase
-import datetime
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from datetime import datetime, timedelta
 import datetime
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 import json
-from upload_data import channel
-from search import videoid_group
-from upload_data import channel
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
     jsonFile.close()
 config = secrets['FIREBASE_CONFIG']
-firebase = pyrebase.initialize_app(config)
-db = firebase.database()
+cred = credentials.Certificate(secrets['FIREBASE_ADMIN_CONFIG'])
+
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://jinho-337705-default-rtdb.asia-southeast1.firebasedatabase.app/'
+})
 
 DEVELOPER_KEY = secrets['API_KEY']
 YOUTUBE_API_SERVICE_NAME="youtube"
@@ -28,20 +28,30 @@ with open("category.json") as jsonFile:
     jsonFile.close()
 category_dict=all_category['category']
 
+ref=db.reference('recommend')
+ref_video=db.reference('video')
+
+def videoid_group(videoid:str):
+    snapshot = ref_video.order_by_child('videoId').equal_to(videoid).get()
+    videoid_video=[]
+    for val in snapshot.values():
+        videoid_video.append(val)
+    return videoid_video
+
 # 추천하기 눌렸을때 추천 정보 저장, 24시간 이내 추천 정보가 5개 넘어갈 경우 db에 동영상 정보 저장
 def recommend(videoid:str, userid:str):
     time_data=datetime.datetime.now()
     time=time_data.strftime('%Y-%m-%d %H:%M:%S')
     amount=0
-    db.child('recommend').child(videoid).update({
+    ref.child(videoid).update({
         userid:time
     })
-    data=db.child('recommend').child(videoid).get()
-    for i in data.val():
-        if datetime.datetime.strptime(data.val()[i], '%Y-%m-%d %H:%M:%S')>=datetime.datetime.now()+timedelta(hours=-24):
+    data=ref.child(videoid).get()
+    for i in data:
+        if datetime.datetime.strptime(data[i], '%Y-%m-%d %H:%M:%S')>=datetime.datetime.now()+timedelta(hours=-24):
             amount+=1
         else:
-            db.child('recommend').child(videoid).child(i).remove()
+            ref.child(videoid).child(i).delete()
     if amount>=5:
         Information = youtube.videos().list(
             part='snippet',
@@ -53,7 +63,7 @@ def recommend(videoid:str, userid:str):
         publishedAt = datetime.datetime.strptime(publishedAt, '%Y-%m-%d %H:%M:%S') - timedelta(hours=-9)
         channelId=Information['items'][0]['snippet']['channelId']
         categoryId=Information['items'][0]['snippet']['categoryId']
-        db.child('video').child(videoid).update({
+        db.ref_video.child(videoid).update({
             'title':Information['items'][0]['snippet']['title'],
             'uploadDate': publishedAt.__str__(),
             'url':f'https://www.youtube.com/embed/{videoid}',
@@ -100,3 +110,11 @@ def youtube_search(keyword:str):
             response.append('X')
         result.append(dict(zip(key_list,response)))
     return result
+
+def channel(channelID:str):
+    Information = youtube.channels().list(
+                part='snippet',
+                id =f'{channelID}'
+                ).execute()
+    channelurl=Information['items'][0]['snippet']['thumbnails']['default']['url']
+    return channelurl

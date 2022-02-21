@@ -110,17 +110,12 @@ def action():
         upload_video_from_dict(i)
 
 def channel(channelID:str):
-    # channelID='UC2CCXzC56k0b8L49R_iW-Yw'
     Information = youtube.channels().list(
                 part='snippet',
                 id =f'{channelID}'
                 ).execute()
     channelurl=Information['items'][0]['snippet']['thumbnails']['default']['url']
     return channelurl
-    # db.child('channel').child(channelID).update({
-    #     'url':channelurl
-    # })
 
-action()
 if __name__ == '__main__':
     pass
