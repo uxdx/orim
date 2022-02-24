@@ -1,45 +1,48 @@
 body {
   margin: 0px; }
+  body a {
+    text-decoration: none;
+    color: inherit; }
 
-  .searchblock {
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    width: 500px;
-    height: 40px;
+.searchblock {
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 500px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 8fr 1fr; }
+
+  .top {
     display: grid;
-    grid-template-columns: 8fr 1fr; }
-
-    .top {
-      display: grid;
-      grid-template-columns: 70px 1fr 100px;
-      margin: 0px;
-      height: 100px;
-      border-bottom: 1px solid gray; }
-      .top .material-icons {
-        font-size: 30px;
-        text-align: center;
-        margin: 15px;
-        padding-top: 5px; }
-        .top h1 {
-          margin: 25px;
-          text-align: center; }
-          .top .sign {
-            font-size: 18px;
-            text-align: center;
-            height: 30px;
-            padding-top: 35px;
-            text-decoration: none;
-            color: inherit; }
-            .top button {
-              border: none;
-              background-color: white; }
-              .top .drawer .drawer_top {
-                display: grid;
-                grid-template-columns: 2fr 1fr; }
-                .top .drawer .drawer_top h2 {
-                  margin: 25; }
+    grid-template-columns: 70px 1fr 100px;
+    margin: 0px;
+    height: 110px;
+    border-bottom: 1px solid gray; }
+    .top .material-icons {
+      font-size: 30px;
+      text-align: center;
+      margin: 15px;
+      padding-top: 5px; }
+      .top .orim {
+        font-size: 40px;
+        font-weight: 700;
+        margin: 25px;
+        text-align: center; }
+        .top .sign {
+          font-size: 18px;
+          text-align: center;
+          height: 30px;
+          padding-top: 35px; }
+          .top button {
+            border: none;
+            background-color: white; }
+            .top .drawer .drawer_top {
+              display: grid;
+              grid-template-columns: 2fr 1fr; }
+              .top .drawer .drawer_top h2 {
+                margin: 25; }
 
 .main_video_line {
   margin-top: 50px;
@@ -119,12 +122,75 @@ body {
 
 .video_interface {
   display: grid;
+  grid-template-rows: 1fr 960px;
   justify-content: center;
   margin-top: 70px;
   margin-left: auto;
   margin-right: auto; }
-  .video_interface .video_interface_sub_channel img {
-    width: 40px;
-    height: 40px;
-    border-radius: 70%;
-    overflow: hidden; }
+  .video_interface .video_interface_title {
+    width: 960px;
+    font-size: 25px;
+    padding-bottom: 10px; }
+    .video_interface .video_interface_sub_channel .video_interface_sub_channel_name {
+      width: 200px;
+      height: 39px;
+      display: inline-grid;
+      grid-template-columns: 1fr 4fr; }
+      .video_interface .video_interface_sub_channel .video_interface_sub_channel_name p {
+        font-size: 18px;
+        padding-top: 4.5px;
+        padding-bottom: 4.5px;
+        margin: 0px; }
+    .video_interface .video_interface_sub_channel .video_information_sub_channel_date {
+      display: inline;
+      float: right;
+      padding-top: 9px;
+      padding-bottom: 9px; }
+      .video_interface .video_interface_sub_channel img {
+        width: 35px;
+        height: 35px;
+        border-radius: 70%;
+        overflow: hidden; }
+
+.search_main {
+  margin-top: 50px;
+  margin-left: 100px;
+  padding-left: 0px;
+  width: 2000px;
+  line-height: 200%; }
+  .search_main a {
+    text-decoration: none;
+    color: inherit; }
+    .search_main .search_contents {
+      width: 1290px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      grid-column-gap: 30px; }
+      .search_main .search_contents .search_thumbnail {
+        width: 360px; }
+        .search_main .search_contents .search_thumbnail img {
+          width: 360px;
+          height: 270px;
+          border: solid gray 1px; }
+      .search_main .search_contents .search_information {
+        width: 900px; }
+        .search_main .search_contents .search_information .search_information_category {
+          display: block;
+          margin-bottom: 20px;
+          font-size: 15px; }
+          .search_main .search_contents .search_information .search_information_title {
+            font-size: 22px;
+            font-weight: 600; }
+            .search_main .search_contents .search_information .search_information_channel {
+              display: inline-grid;
+              grid-template-columns: 35px 1fr; }
+              .search_main .search_contents .search_information .search_information_channel .search_information_Img_channel {
+                width: 28px;
+                height: 28px;
+                border-radius: 70%;
+                overflow: hidden;
+                border: 1px solid gray; }
+                .search_main .search_contents .search_information .search_information_channel .search_category_channel_name {
+                  font-size: 18px; }

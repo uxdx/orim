@@ -10,29 +10,8 @@
 
         {% include 'shares/_search.html' %}
 
-        <dev class = "video_interface">
 
-            <dev class = "video_interface_sub">
-                <div class = "video_interface_title">
-                    <a href = "http://www.naver.com" >{{video['title']}}</a>
-                    
-                </div>
-                <div class = "video_interface_sub_channel">
-                    <div class = "video_interface_sub_channel_name">
-                        <img src = "{{video['Img_channel']}}">
-                        <a href = "http://www.naver.com" >{{video['channel_name']}}</a>
-                    </div>
-        
-                    <div class = "video_information_sub_channel_date">
-                        {{video['uploadDate']}}
-                    </div>
-                </div>
-            </dev>
-            
-            <iframe class="video" allowfullscreen="" width="960" height="540" frameborder="0" src="{{video['url']}}" loading="lazy"></iframe>
-            
-        
-        </dev>
+        {% include 'detail/_detail_function.html'%}
         
         {% include 'shares/_footer.html' %}
 

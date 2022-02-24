@@ -1,6 +1,7 @@
 import pyrebase
 
 from utils.secret_manager import access_secret
+from utils.search_al import search_title
 
 # secrets.json 로딩
 config = access_secret('FIREBASE_CONFIG')
@@ -43,4 +44,10 @@ def get_videos_by_search_as_keyword(keyword:str) -> dict:
     """
 
     return dict()
+def get_videos_by_search_title(pattern:str=None):
+    if pattern==None:
+        video_list=[]
+    else:
+        video_list=search_title(pattern)
+    return video_list
 

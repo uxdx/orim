@@ -1,0 +1,23 @@
+<dev class = "video_interface">
+
+    <dev class = "video_interface_sub">
+        <div class = "video_interface_title">
+            {{video['title']}}
+            
+        </div>
+        <div class = "video_interface_sub_channel">
+            <div class = "video_interface_sub_channel_name">
+                <img src = "{{video['Img_channel']}}">
+                <P>{{video['channel_name']}}</P>
+            </div>
+
+            <div class = "video_information_sub_channel_date">
+                {{video['uploadDate']}}
+            </div>
+        </div>
+    </dev>
+    
+    <iframe class="video" allowfullscreen="" width="960" height="540" frameborder="0" src="{{video['url']}}" loading="lazy"></iframe>
+    
+
+</dev>

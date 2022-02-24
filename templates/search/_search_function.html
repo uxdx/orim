@@ -1,0 +1,33 @@
+<ol class = 'search_main'>
+           
+    {%if (search | length) == 0 %}
+        <p> 찾으시는 영상이 없습니다</p>
+    {%else%}
+        {% for value in search%}
+            
+                
+        <list class = 'search_contents'>
+
+            <dev class = 'search_thumbnail'>
+                <a href = "{{base_url}}/video?vid={{value['videoId']}}" target = "_blank">
+                    <img src = "{{value['thumbnail']}}">
+                </a>
+            </dev>
+
+            <dev class = 'search_information'>
+                <a class = 'search_information_category' href = "{{base_url}}/video?vid={{value['videoId']}}" target = "_blank">{{value['category']}}</a>
+                <a class = 'search_information_title' href = "{{base_url}}/video?vid={{value['videoId']}}" target = "_blank">{{value['title']}}</a><br>
+                <dev class = 'search_information_channel'>
+                    <img class = 'search_information_Img_channel' src = "{{value['Img_channel']}}" target = "_blank">
+                    <a class = 'search_category_channel_name' href = "{{base_url}}/video?vid={{value['videoId']}}" target = "_blank">{{value['channel_name']}}</a>
+                </dev><br>
+                <a class = 'search_information_uploadDate' href = "{{base_url}}/video?vid={{value['videoId']}}" target = "_blank">{{value['uploadDate']}}</a>
+            </dev>
+
+        </list>
+
+
+        {%endfor%}
+    {%endif%}
+
+</ol>

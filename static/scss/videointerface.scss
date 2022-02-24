@@ -1,13 +1,43 @@
 .video_interface{
+    
     display : grid;
+    grid-template-rows: 1fr 960px;
     justify-content: center;
     margin-top:70px;
     margin-left: auto;
     margin-right:auto;
+
+    .video_interface_title{
+        width : 960px;
+        font-size: 25px;
+        padding-bottom: 10px;
+        
+        
+    }
+
     .video_interface_sub_channel{
+        
+        .video_interface_sub_channel_name{
+            width : 200px;
+            height : 39px;
+            display: inline-grid;
+            grid-template-columns: 1fr 4fr;
+            p{
+                font-size: 18px;
+                padding-top: 4.5px;
+                padding-bottom: 4.5px;
+                margin : 0px;
+            }
+        }
+        .video_information_sub_channel_date{
+            display: inline;
+            float: right;
+            padding-top: 9px;
+            padding-bottom: 9px;
+        }
         img{
-            width:40px;
-            height:40px;
+            width:35px;
+            height:35px;
             border-radius: 70%;
             overflow: hidden;
 
