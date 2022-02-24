@@ -4,10 +4,16 @@ from initialize_firebase import ref_like, ref_mostPopular, ref_recommend, ref_Us
 def get_index_data() -> dict:
     videos_Gaming = ref_mostPopular.child('Gaming').get()
     list_Gaming=videos_Gaming.values()
+    for i in list_Gaming:
+        i['uploadDate']=i['uploadDate'][0:10]
     videos_Music = ref_mostPopular.child('Music').get()
     list_Music=videos_Music.values()
+    for i in list_Music:
+        i['uploadDate']=i['uploadDate'][0:10]
     videos_Sports = ref_mostPopular.child('Sports').get()
     list_Sports=videos_Sports.values()
+    for i in list_Sports:
+        i['uploadDate']=i['uploadDate'][0:10]
     return list_Gaming, list_Music, list_Sports
 
 # key 입력 받아서 영상 가져오는 함수
@@ -24,6 +30,8 @@ def get_videos_by_category(category:str=None):
         video_list=[]
     else:
         video_list=Recently_category_group(category)
+        for i in video_list:
+            i['uploadDate']=i['uploadDate'][0:10]
     return video_list
 
 # 채널 모아보기 정확한 입력 필요 최근 업로드 순
@@ -32,6 +40,8 @@ def get_videos_by_channel_name(channel:str=None):
         video_list=[]
     else:
         video_list=Recently_channel_group(channel)
+        for i in video_list:
+            i['uploadDate']=i['uploadDate'][0:10]
     return video_list
 
 # 검색어 입력 필요(데이터베이스에서 검색)
@@ -40,6 +50,8 @@ def get_videos_by_search_title(pattern:str=None):
         video_list=[]
     else:
         video_list=search_title(pattern)
+        for i in video_list:
+            i['uploadDate']=i['uploadDate'][0:10]
     return video_list
 
 def get_videos_by_search_channel_name(pattern:str=None):
@@ -47,6 +59,8 @@ def get_videos_by_search_channel_name(pattern:str=None):
         video_list=[]
     else:
         video_list=search_channel_name(pattern)
+        for i in video_list:
+            i['uploadDate']=i['uploadDate'][0:10]
     return video_list
 
 # 카테고리 영상 불러오기
@@ -55,6 +69,8 @@ def category_group(category:str):
     category_video=[]
     for val in snapshot.values():
         category_video.append(val)
+    for i in category_video:
+        i['uploadDate']=i['uploadDate'][0:10]
     return category_video
 
 # 채널 영상 불러오기
@@ -63,6 +79,8 @@ def channel_group(channel:str):
     channel_video=[]
     for val in snapshot.values():
         channel_video.append(val)
+    for i in channel_video:
+        i['uploadDate']=i['uploadDate'][0:10]
     return channel_video
 
 def videoid_group(videoid:str):
@@ -70,6 +88,8 @@ def videoid_group(videoid:str):
     videoid_video=[]
     for val in snapshot.values():
         videoid_video.append(val)
+    for i in videoid_video:
+        i['uploadDate']=i['uploadDate'][0:10]
     return videoid_video
 
 # 업로드 날짜 선->후
