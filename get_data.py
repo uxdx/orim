@@ -2,25 +2,15 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 import json
-
-with open("secrets.json") as jsonFile:
-    secrets = json.load(jsonFile)
-    jsonFile.close()
-
-cred = credentials.Certificate(secrets['FIREBASE_ADMIN_CONFIG'])
-
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://jinho-337705-default-rtdb.asia-southeast1.firebasedatabase.app/'
-})
+from initialize_firebase import ref_like, ref_mostPopular, ref_recommend, ref_User, ref_video
 
 # 메인 페이지용 함수
 def get_index_data() -> dict:
-    ref = db.reference('mostPopular')
-    videos_Gaming = ref.child('Gaming').get()
+    videos_Gaming = ref_mostPopular.child('Gaming').get()
     list_Gaming=videos_Gaming.values()
-    videos_Music = ref.child('Music').get()
+    videos_Music = ref_mostPopular.child('Music').get()
     list_Music=videos_Music.values()
-    videos_Sports = ref.child('Sports').get()
+    videos_Sports = ref_mostPopular.child('Sports').get()
     list_Sports=videos_Sports.values()
     return list_Gaming, list_Music, list_Sports
 
@@ -29,8 +19,7 @@ def get_video_by_vid(key:str=None):
     if key==None:
         video_list={}
     else:
-        ref = db.reference('video')
-        video_list=ref.child(key).get()
+        video_list=ref_video.child(key).get()
     return video_list
 
 # 카테고리 모아보기 정확한 입력 필요 최근 업로드 순
@@ -66,8 +55,7 @@ def get_videos_by_search_channel_name(pattern:str=None):
 
 # 카테고리 영상 불러오기
 def category_group(category:str):
-    ref = db.reference('video')
-    snapshot = ref.order_by_child('category').equal_to(category).get()
+    snapshot = ref_video.order_by_child('category').equal_to(category).get()
     category_video=[]
     for val in snapshot.values():
         category_video.append(val)
@@ -75,25 +63,14 @@ def category_group(category:str):
 
 # 채널 영상 불러오기
 def channel_group(channel:str):
-    ref = db.reference('video')
-    snapshot = ref.order_by_child('channel_name').equal_to(channel).get()
+    snapshot = ref_video.order_by_child('channel_name').equal_to(channel).get()
     channel_video=[]
     for val in snapshot.values():
         channel_video.append(val)
     return channel_video
 
-# ex)제목으로 
-# def title_group(title:str):
-#     ref = db.reference('video')
-#     snapshot = ref.order_by_child('title').equal_to(title).get()
-#     title_video=[]
-#     for val in snapshot.values():
-#         title_video.append(val)
-#     return title_video
-
 def videoid_group(videoid:str):
-    ref = db.reference('video')
-    snapshot = ref.order_by_child('videoId').equal_to(videoid).get()
+    snapshot = ref_video.order_by_child('videoId').equal_to(videoid).get()
     videoid_video=[]
     for val in snapshot.values():
         videoid_video.append(val)
@@ -167,8 +144,7 @@ def find(pattern, char):
 
 # 검색 기능
 def get_search_data():
-    ref=db.reference('video')
-    videos_list = ref.get()
+    videos_list = ref_video.get()
     return videos_list
 
 def search_title(pattern:str):

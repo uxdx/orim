@@ -7,16 +7,11 @@ from googleapiclient.errors import HttpError
 from datetime import datetime, timedelta
 import datetime
 import json
+from initialize_firebase import ref_like, ref_mostPopular, ref_recommend, ref_User, ref_video
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
     jsonFile.close()
-
-cred = credentials.Certificate(secrets['FIREBASE_ADMIN_CONFIG'])
-
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://jinho-337705-default-rtdb.asia-southeast1.firebasedatabase.app/'
-})
 
 DEVELOPER_KEY = secrets['API_KEY']
 YOUTUBE_API_SERVICE_NAME="youtube"
@@ -28,14 +23,8 @@ with open("category.json") as jsonFile:
     jsonFile.close()
 category_dict=all_category['category']
 
-ref_video = db.reference('video')
-ref_mostPopular = db.reference('mostPopular')
-
 def mostPopular():
-    #카테고리 추가할 때 수정 필요
-    category=[10, 17, 20]
     maxResults=5
-    # key_list=['title','uploadDate','videoId','url','thumbnail','like','view','category','channel_name','Ranking']
     key_list=['title','uploadDate','videoId','url','thumbnail','category','channel_name','Ranking','channelId','channelurl','Img_channel']
     result=[]
     rank=['A','B','C','D','E']
@@ -60,14 +49,6 @@ def mostPopular():
             response.append(videoid)
             response.append(f"https://www.youtube.com/embed/{videoid}")
             response.append(Information['items'][i]['snippet']['thumbnails']['high']['url'])
-            # 좋아요 조회수 제거
-            # if Information['items'][i]['statistics'].get('likeCount'):
-            #     response.append(Information['items'][i]['statistics']['likeCount'])
-            # else:
-            #     response.append("NULL")
-            # response.append(Information['items'][i]['statistics']['viewCount'])
-            
-            #카테고리 추가할 때 수정 필요 이거 수정필요 없도록 고쳐야함
             response.append(category_dict[Information['items'][i]['snippet']['categoryId']])
             response.append(Information['items'][i]['snippet']['channelTitle'])
             response.append(f"{CTGR}"+rank[i])

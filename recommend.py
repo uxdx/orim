@@ -2,20 +2,12 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from datetime import datetime, timedelta
 import datetime
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
 import json
+from initialize_firebase import ref_like, ref_mostPopular, ref_recommend, ref_User, ref_video
 
 with open("secrets.json") as jsonFile:
     secrets = json.load(jsonFile)
     jsonFile.close()
-config = secrets['FIREBASE_CONFIG']
-cred = credentials.Certificate(secrets['FIREBASE_ADMIN_CONFIG'])
-
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://jinho-337705-default-rtdb.asia-southeast1.firebasedatabase.app/'
-})
 
 DEVELOPER_KEY = secrets['API_KEY']
 YOUTUBE_API_SERVICE_NAME="youtube"
@@ -27,9 +19,6 @@ with open("category.json") as jsonFile:
     all_category = json.load(jsonFile)
     jsonFile.close()
 category_dict=all_category['category']
-
-ref=db.reference('recommend')
-ref_video=db.reference('video')
 
 def videoid_group(videoid:str):
     snapshot = ref_video.order_by_child('videoId').equal_to(videoid).get()
@@ -43,15 +32,15 @@ def recommend(videoid:str, userid:str):
     time_data=datetime.datetime.now()
     time=time_data.strftime('%Y-%m-%d %H:%M:%S')
     amount=0
-    ref.child(videoid).update({
+    ref_recommend.child(videoid).update({
         userid:time
     })
-    data=ref.child(videoid).get()
+    data=ref_recommend.child(videoid).get()
     for i in data:
         if datetime.datetime.strptime(data[i], '%Y-%m-%d %H:%M:%S')>=datetime.datetime.now()+timedelta(hours=-24):
             amount+=1
         else:
-            ref.child(videoid).child(i).delete()
+            ref_recommend.child(videoid).child(i).delete()
     if amount>=5:
         Information = youtube.videos().list(
             part='snippet',
@@ -63,7 +52,7 @@ def recommend(videoid:str, userid:str):
         publishedAt = datetime.datetime.strptime(publishedAt, '%Y-%m-%d %H:%M:%S') - timedelta(hours=-9)
         channelId=Information['items'][0]['snippet']['channelId']
         categoryId=Information['items'][0]['snippet']['categoryId']
-        db.ref_video.child(videoid).update({
+        ref_video.child(videoid).update({
             'title':Information['items'][0]['snippet']['title'],
             'uploadDate': publishedAt.__str__(),
             'url':f'https://www.youtube.com/embed/{videoid}',
