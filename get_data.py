@@ -1,7 +1,3 @@
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
-import json
 from initialize_firebase import ref_like, ref_mostPopular, ref_recommend, ref_User, ref_video
 
 # 메인 페이지용 함수
