@@ -1,9 +1,9 @@
 <ol class = 'search_main'>
            
-    {%if (search | length) == 0 %}
+    {%if (search_video| length) == 0 %}
         <p> 찾으시는 영상이 없습니다</p>
     {%else%}
-        {% for value in search%}
+        {% for value in search_video %}
             
                 
         <list class = 'search_contents'>

@@ -78,10 +78,4 @@ def search_channel_name(pattern:str):
             search_result.append(i)
     return search_result
 
-def get_videos_by_search_title(pattern:str=None):
-    if pattern==None:
-        video_list=[]
-    else:
-        video_list=search_title(pattern)
-    return video_list
 

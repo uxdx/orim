@@ -1,4 +1,8 @@
 <form class = "searchblock" method = "get" action="{{BASE_URL}}/search/">
+    <select class = "search_select" name="option" value="">
+        <option>제목</option>
+        <option>채널명</option>
+    </select>
     <input class = "searchbox" type="text" placeholder="검색어 입력" name="keyword" value="">
     <button type="submit">
         <span class="material-icons">search</span>

@@ -9,40 +9,36 @@
         {% include 'shares/_top.html' %}
 
         {% include 'shares/_search.html' %}
-
+    
         <ol class = "main_video_line" >
             <ol class = "main_video_category">
                 <p>Gaming</p>
-                {% for key, value in video_list.items()%}
+                {% for value in video_list_Gaming%}
                     
-                    {%if value['category'] == 'Gaming'%}        
-                        {% include 'home/_main_video.html' %}
-                    {%endif%}
-    
+                    {% include 'home/_main_video.html' %}
+
                 {%endfor%}
             </ol>       
             <ol class = "main_video_category">
                 <p>Music</p>
-                {% for key, value in video_list.items()%}
-                    
-                    {%if value['category'] == 'Music'%}        
-                        {% include 'home/_main_video.html' %}
-                    {%endif%}
+                {% for value in video_list_Music%}
+                        
+                    {% include 'home/_main_video.html' %}
                     
                 {%endfor%}
             </ol>   
             <ol class = "main_video_category">
                 <p>Sports</p>
-                {% for key, value in video_list.items()%}
-                    
-                    {%if value['category'] == 'Sports'%}        
-                        {% include 'home/_main_video.html' %}
-                    {%endif%}
-                    
+                {% for value in video_list_Sports%}
+                     
+                    {% include 'home/_main_video.html' %}
+                   
                 {%endfor%}
             </ol>               
             
-        </ol> 
+        </ol>
+
+   
         
         {% include 'shares/_footer.html' %}
 

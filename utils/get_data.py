@@ -1,7 +1,7 @@
 import pyrebase
 
 from utils.secret_manager import access_secret
-from utils.search_al import search_title
+from utils.search_al import search_title,search_channel_name
 
 # secrets.json 로딩
 config = access_secret('FIREBASE_CONFIG')
@@ -10,16 +10,18 @@ firebase = pyrebase.initialize_app(config)
 # 데이터베이스 인스턴스 생성
 db = firebase.database()
 
-def get_home_videos() -> dict:
+def get_index_videos():
+    videos_Gaming=[]
+    videos_Music=[]
+    videos_Gaming=[]
     videos_Gaming = db.child('mostPopular').child('Gaming').get()
-    videos_list = videos_Gaming.val()
+    videos_list = list(videos_Gaming.val().values())
     videos_Music = db.child('mostPopular').child('Music').get()
-    videos_list2 = videos_Music.val()
+    videos_list2 = list(videos_Music.val().values())
     videos_Sports = db.child('mostPopular').child('Sports').get()
-    videos_list3 = videos_Sports.val()
-    videos_list.update(videos_list2)
-    videos_list.update(videos_list3)
-    return videos_list
+    videos_list3 = list(videos_Sports.val().values())
+    
+    return videos_list,videos_list2,videos_list3
 
 def get_video_by_vid(key:str=None) -> dict:
     if key==None:
@@ -51,3 +53,9 @@ def get_videos_by_search_title(pattern:str=None):
         video_list=search_title(pattern)
     return video_list
 
+def get_videos_by_search_channel_name(pattern:str=None):
+    if pattern==None:
+        video_list=[]
+    else:
+        video_list=search_channel_name(pattern)
+    return video_list
